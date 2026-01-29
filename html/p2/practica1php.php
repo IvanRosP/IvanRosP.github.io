@@ -1,3 +1,0 @@
-<?php
-    echo "Nombre: <b>{$_POST['nombre']}</b><br>Apellido paterno: <b>{$_POST['ap_p']}</b><br>Apellido materno: <b>{$_POST['ap_m']}</b><br>Nombre de usuario: <b>{$_POST['usuario']}</b><br>Contraseña: <b>{$_POST['contrasena']}</b><br>Fecha de nacimiento: <b>{$_POST['fechanac']}</b><br>País: <b>{$_POST['pais']}</b><br>Ciudad: <b>{$_POST['ciudad']}</b><br>Calle: <b>{$_POST['calle']}</b><br>Número de casa: <b>{$_POST['numero']}</b><br>Colonia: <b>{$_POST['colonia']}</b><br>E-mail: <b>{$_POST['email']}</b><br>R.F.C.: <b>{$_POST['rfc']}</b><br>C.P.: <b>{$_POST['cp']}</b><br>";
-?>
