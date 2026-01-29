@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <title>Contacto</title>
+       <meta charset="utf-8">
+
+       <!-- EmailJS -->
+       <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+       <script>
+           (function(){
+               emailjs.init("TU_PUBLIC_KEY");
+           })();
+       </script>
+   </head>
+
+   <body>
+
+       <h1 style="text-align: center;">Contacto</h1>
+
+       <h2>Formulario de contacto</h2>
+
+       <form id="contactForm">
+           <p style="font-size: larger;">
+               <label>Nombre:</label><br>
+               <input type="text" name="from_name" required>
+           </p>
+
+           <p style="font-size: larger;">
+               <label>Correo electrónico:</label><br>
+               <input type="email" name="from_email" required>
+           </p>
+
+           <p style="font-size: larger;">
+               <label>Mensaje:</label><br>
+               <textarea name="message" rows="5" cols="40" required></textarea>
+           </p>
+
+           <p>
+               <button type="submit">Enviar mensaje</button>
+           </p>
+       </form>
+
+       <p id="respuesta" style="font-size: larger; color: green; display: none;">
+           Gracias por tu mensaje. Hemos recibido tu solicitud de información.
+           En breve recibirás un correo de confirmación.
+       </p>
+
+       <script>
+           document.getElementById("contactForm").addEventListener("submit", function(e) {
+               e.preventDefault();
+
+               emailjs.send(
+                   "TU_SERVICE_ID",
+                   "TU_TEMPLATE_ID",
+                   {
+                       from_name: this.from_name.value,
+                       from_email: this.from_email.value,
+                       message: this.message.value,
+                       reply_to: this.from_email.value
+                   }
+               ).then(function() {
+                   document.getElementById("respuesta").style.display = "block";
+                   document.getElementById("contactForm").reset();
+               }, function(error) {
+                   alert("Error al enviar el mensaje");
+               });
+           });
+       </script>
+   </body>
+</html>
