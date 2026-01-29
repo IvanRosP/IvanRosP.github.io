@@ -56,9 +56,9 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
       reply_to: this.from_email.value
    };
 
-   emailjs.send("SERVICE_ID", "TEMPLATE_ID_ADMIN", params)
+   emailjs.send("service_wn4uss6", "template_ft4cmj4", params)
    .then(function() {
-      return emailjs.send("SERVICE_ID", "TEMPLATE_ID_AUTORESPUESTA", params);
+      return emailjs.send("service_wn4uss6", "template_ft4cmj4", params);
    })
    .then(function() {
       document.getElementById("respuesta").style.display = "block";
