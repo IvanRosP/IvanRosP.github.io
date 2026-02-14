@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 04 - Mecanismos de Defensa en Red</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .btn-pdf {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .btn-pdf:hover {
+            background-color: #1e40af;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            border-left: 6px solid #2563eb;
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1f2937;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media print {
+            .btn-pdf, footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ACTIVIDAD 04</h1>
+    <p>Mecanismos de defensa en red</p>
+    <p><strong>Ivan Ros Padilla</strong></p>
+</header>
+
+<div class="container">
+
+    <h2>1. Introducción</h2>
+    <p>
+        Los mecanismos de defensa en red son fundamentales para proteger la infraestructura
+        tecnológica contra amenazas internas y externas. Estos mecanismos permiten prevenir,
+        detectar y responder ante intentos de acceso no autorizado, ataques de denegación
+        de servicio y explotación de vulnerabilidades.
+    </p>
+
+    <p>
+        En esta actividad se analizan distintas estrategias de protección aplicadas
+        en entornos empresariales modernos.
+    </p>
+
+    <h2>2. Desarrollo Técnico</h2>
+
+    <h3>2.1 Principales mecanismos de defensa</h3>
+
+    <table>
+        <tr>
+            <th>Mecanismo</th>
+            <th>Función Principal</th>
+        </tr>
+        <tr>
+            <td>Firewall</td>
+            <td>Filtrado de tráfico entrante y saliente según reglas definidas.</td>
+        </tr>
+        <tr>
+            <td>IDS (Intrusion Detection System)</td>
+            <td>Detecta patrones de ataque o comportamientos anómalos.</td>
+        </tr>
+        <tr>
+            <td>IPS (Intrusion Prevention System)</td>
+            <td>Bloquea automáticamente tráfico malicioso detectado.</td>
+        </tr>
+        <tr>
+            <td>Segmentación de red</td>
+            <td>Divide la red en zonas para limitar movimiento lateral.</td>
+        </tr>
+        <tr>
+            <td>VPN</td>
+            <td>Permite conexiones seguras mediante cifrado.</td>
+        </tr>
+        <tr>
+            <td>EDR / SIEM</td>
+            <td>Monitoreo y correlación de eventos de seguridad.</td>
+        </tr>
+    </table>
+
+    <h3>2.2 Estrategia de Defensa en Profundidad</h3>
+
+    <p>
+        La defensa en profundidad consiste en implementar múltiples capas de seguridad,
+        de manera que si un control falla, otro pueda mitigar el impacto. Esta estrategia
+        incluye controles físicos, técnicos y administrativos.
+    </p>
+
+    <ul>
+        <li>Perímetro protegido con firewall.</li>
+        <li>Monitoreo continuo mediante IDS/IPS.</li>
+        <li>Segmentación de red para aislar servidores críticos.</li>
+        <li>Respaldo y recuperación ante desastres.</li>
+        <li>Políticas de control de acceso y autenticación multifactor.</li>
+    </ul>
+
+    <h3>2.3 Beneficios en entornos empresariales</h3>
+
+    <table>
+        <tr>
+            <th>Beneficio</th>
+            <th>Impacto</th>
+        </tr>
+        <tr>
+            <td>Reducción de superficie de ataque</td>
+            <td>Menor exposición a amenazas externas.</td>
+        </tr>
+        <tr>
+            <td>Contención de incidentes</td>
+            <td>Limitación del movimiento lateral.</td>
+        </tr>
+        <tr>
+            <td>Detección temprana</td>
+            <td>Respuesta más rápida ante ataques.</td>
+        </tr>
+    </table>
+
+    <h2>3. Material Multimedia</h2>
+
+    <p>
+        <a href="177573-act04.pdf" download class="btn-pdf">
+            Descargar versión formal en PDF
+        </a>
+    </p>
+
+    <h2>4. Reflexión Técnica</h2>
+    <p>
+        La implementación de mecanismos de defensa en red debe ser estratégica y
+        alineada con el análisis de riesgos de la organización. No basta con instalar
+        herramientas; es necesario integrarlas dentro de una arquitectura coherente.
+    </p>
+
+    <p>
+        En entornos actuales, donde los ataques son cada vez más sofisticados,
+        la defensa en profundidad y la segmentación de red se convierten en
+        pilares fundamentales de la ciberseguridad.
+    </p>
+
+    <h2>5. Referencias Técnicas</h2>
+    <ul>
+        <li>NIST Cybersecurity Framework.</li>
+        <li>ISO/IEC 27001:2022 – Information Security Management.</li>
+        <li>Netfilter Project – Documentación de iptables.</li>
+    </ul>
+
+</div>
+
+<footer>
+    Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
+
+</body>
+</html>
