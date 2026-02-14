@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 02 - Análisis de Servicios de Seguridad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .btn-pdf {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .btn-pdf:hover {
+            background-color: #1e40af;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            border-left: 6px solid #2563eb;
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1f2937;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media print {
+            .btn-pdf, footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ACTIVIDAD 02</h1>
+    <p>Análisis de servicios de seguridad (X.800 y RFC 4949)</p>
+    <p><strong>Ivan Ros Padilla</strong></p>
+</header>
+
+<div class="container">
+
+    <h2>1. Introducción</h2>
+    <p>
+        La arquitectura de seguridad definida en la recomendación <strong>ITU-T X.800</strong>
+        establece los servicios fundamentales que deben garantizar los sistemas de información:
+        confidencialidad, integridad, autenticación, control de acceso y no repudio.
+    </p>
+
+    <p>
+        Por su parte, el <strong>RFC 4949 – Internet Security Glossary</strong> proporciona
+        definiciones técnicas estandarizadas utilizadas en el ámbito de la seguridad informática.
+        Esta actividad analiza escenarios de compromiso relacionando ambos marcos conceptuales.
+    </p>
+
+    <h2>2. Desarrollo Técnico</h2>
+
+    <h3>2.1 Servicios de Seguridad según X.800</h3>
+
+    <table>
+        <tr>
+            <th>Servicio</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Confidencialidad</td>
+            <td>Protección contra divulgación no autorizada de información.</td>
+        </tr>
+        <tr>
+            <td>Integridad</td>
+            <td>Garantiza que la información no sea alterada indebidamente.</td>
+        </tr>
+        <tr>
+            <td>Disponibilidad</td>
+            <td>Asegura acceso oportuno a los recursos cuando se requieren.</td>
+        </tr>
+        <tr>
+            <td>Autenticación</td>
+            <td>Verifica la identidad de usuarios o sistemas.</td>
+        </tr>
+        <tr>
+            <td>Control de Acceso</td>
+            <td>Restringe el acceso solo a entidades autorizadas.</td>
+        </tr>
+        <tr>
+            <td>No Repudio</td>
+            <td>Impide que una entidad niegue haber realizado una acción.</td>
+        </tr>
+    </table>
+
+    <h3>2.2 Relación con RFC 4949</h3>
+
+    <table>
+        <tr>
+            <th>Concepto RFC 4949</th>
+            <th>Aplicación en Escenarios Reales</th>
+        </tr>
+        <tr>
+            <td>Data Breach</td>
+            <td>Compromete confidencialidad e integridad.</td>
+        </tr>
+        <tr>
+            <td>Supply Chain Attack</td>
+            <td>Impacta integridad mediante software comprometido.</td>
+        </tr>
+        <tr>
+            <td>Credential Compromise</td>
+            <td>Afecta autenticación y control de acceso.</td>
+        </tr>
+        <tr>
+            <td>Insider Threat</td>
+            <td>Riesgo interno que compromete múltiples servicios.</td>
+        </tr>
+        <tr>
+            <td>Availability Attack</td>
+            <td>Interrumpe operaciones críticas del sistema.</td>
+        </tr>
+    </table>
+
+    <h2>3. Material Multimedia</h2>
+
+    <p>
+        <a href="177573-act02.pdf" download class="btn-pdf">
+            Descargar versión formal en PDF
+        </a>
+    </p>
+
+    <h2>4. Reflexión Técnica</h2>
+    <p>
+        El análisis demuestra que los servicios definidos en X.800 siguen siendo vigentes
+        en la actualidad y se alinean con los términos modernos definidos en el RFC 4949.
+        Comprender estos fundamentos permite interpretar correctamente incidentes reales
+        y diseñar controles preventivos adecuados.
+    </p>
+
+    <p>
+        La seguridad informática no depende únicamente de herramientas tecnológicas,
+        sino de la correcta aplicación de principios arquitectónicos bien definidos.
+    </p>
+
+    <h2>5. Referencias Técnicas</h2>
+    <ul>
+        <li>ITU-T. (1991). X.800 – Security Architecture for Open Systems Interconnection.</li>
+        <li>Shirey, R. (2007). RFC 4949 – Internet Security Glossary, Version 2.</li>
+    </ul>
+
+</div>
+
+<footer>
+    Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
+
+</body>
+</html>
