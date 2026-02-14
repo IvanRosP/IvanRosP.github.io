@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 03 - Políticas de Filtrado en iptables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .btn-pdf {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .btn-pdf:hover {
+            background-color: #1e40af;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            border-left: 6px solid #2563eb;
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        code {
+            background-color: #f1f1f1;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1f2937;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media print {
+            .btn-pdf, footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ACTIVIDAD 03</h1>
+    <p>Interpretación y traducción de políticas de filtrado en iptables</p>
+    <p><strong>Ivan Ros Padilla</strong></p>
+</header>
+
+<div class="container">
+
+    <h2>1. Introducción</h2>
+    <p>
+        <strong>iptables</strong> es una herramienta de administración de firewall en sistemas Linux
+        que permite definir reglas de filtrado de paquetes basadas en tablas, cadenas y políticas.
+        Esta actividad analiza la interpretación de reglas y su traducción a escenarios prácticos
+        de control de tráfico en redes.
+    </p>
+
+    <h2>2. Desarrollo Técnico</h2>
+
+    <h3>2.1 Flujo del paquete en iptables</h3>
+
+    <p>
+        Cuando un paquete llega al sistema, atraviesa diferentes tablas según su propósito:
+    </p>
+
+    <ul>
+        <li><strong>RAW</strong> – Control previo al seguimiento de conexión.</li>
+        <li><strong>MANGLE</strong> – Modificación de encabezados.</li>
+        <li><strong>NAT</strong> – Traducción de direcciones.</li>
+        <li><strong>FILTER</strong> – Filtrado principal (INPUT, OUTPUT, FORWARD).</li>
+    </ul>
+
+    <h3>2.2 Ejemplos de reglas interpretadas</h3>
+
+    <table>
+        <tr>
+            <th>Regla</th>
+            <th>Interpretación</th>
+        </tr>
+        <tr>
+            <td><code>iptables -P INPUT DROP</code></td>
+            <td>Establece política por defecto para bloquear tráfico entrante.</td>
+        </tr>
+        <tr>
+            <td><code>iptables -A INPUT -p tcp --dport 80 -j ACCEPT</code></td>
+            <td>Permite tráfico HTTP entrante.</td>
+        </tr>
+        <tr>
+            <td><code>iptables -A OUTPUT -j ACCEPT</code></td>
+            <td>Permite todo el tráfico saliente.</td>
+        </tr>
+        <tr>
+            <td><code>iptables -A INPUT -s 192.168.1.50 -p tcp --dport 22 -j ACCEPT</code></td>
+            <td>Permite acceso SSH solo desde una IP específica.</td>
+        </tr>
+        <tr>
+            <td><code>-m state --state NEW,ESTABLISHED</code></td>
+            <td>Permite conexiones nuevas y ya establecidas.</td>
+        </tr>
+    </table>
+
+    <h3>2.3 Aplicación en escenarios reales</h3>
+
+    <p>
+        Las reglas de iptables permiten implementar políticas restrictivas como:
+    </p>
+
+    <ul>
+        <li>Modelo de seguridad por defecto “deny all”.</li>
+        <li>Segmentación lógica de servicios.</li>
+        <li>Protección contra accesos no autorizados.</li>
+        <li>Control granular por puerto, protocolo e IP.</li>
+    </ul>
+
+    <h2>3. Material Multimedia</h2>
+
+    <p>
+        <a href="177573-act03.pdf" download class="btn-pdf">
+            Descargar versión formal en PDF
+        </a>
+    </p>
+
+    <h2>4. Reflexión Técnica</h2>
+    <p>
+        La correcta interpretación de reglas en iptables es fundamental para garantizar
+        una política de seguridad coherente. Una configuración incorrecta puede generar
+        brechas de seguridad o bloqueos involuntarios de servicios críticos.
+    </p>
+
+    <p>
+        La implementación de políticas restrictivas por defecto y la autorización explícita
+        de servicios necesarios representa una buena práctica en la administración de firewalls.
+    </p>
+
+    <h2>5. Referencias Técnicas</h2>
+    <ul>
+        <li>Netfilter Project. iptables documentation.</li>
+        <li>Linux Manual Pages – iptables(8).</li>
+        <li>RFC 791 – Internet Protocol.</li>
+    </ul>
+
+</div>
+
+<footer>
+    Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
+
+</body>
+</html>
