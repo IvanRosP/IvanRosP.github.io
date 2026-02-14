@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 05 - Metodologías de Seguridad Informática</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .btn-pdf {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .btn-pdf:hover {
+            background-color: #1e40af;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            border-left: 6px solid #2563eb;
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2563eb;
+            color: white;
+            padding: 8px;
+        }
+
+        td {
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1f2937;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media print {
+            .btn-pdf, footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ACTIVIDAD 05</h1>
+    <p>Cartografiando el pentesting: análisis comparativo de metodologías</p>
+    <p><strong>Ivan Ros Padilla</strong></p>
+</header>
+
+<div class="container">
+
+    <h2>1. Introducción</h2>
+    <p>
+        Las metodologías de pruebas de penetración permiten estructurar
+        evaluaciones de seguridad de forma sistemática y profesional.
+        Cada marco posee enfoques distintos: algunos se centran en la defensa,
+        otros en la evaluación formal de controles y otros en pruebas ofensivas estructuradas.
+    </p>
+
+    <p>
+        Esta actividad compara seis metodologías ampliamente utilizadas
+        en el ámbito de la seguridad informática.
+    </p>
+
+    <h2>2. Desarrollo Técnico</h2>
+
+    <table>
+        <tr>
+            <th>Metodología</th>
+            <th>Objetivo</th>
+            <th>Orientación</th>
+            <th>Organismo</th>
+            <th>Enfoque Principal</th>
+        </tr>
+
+        <tr>
+            <td>MITRE ATT&CK</td>
+            <td>Identificar tácticas y técnicas reales de ataque.</td>
+            <td>Defensa / Inteligencia</td>
+            <td>MITRE Corporation</td>
+            <td>Base de conocimiento de amenazas.</td>
+        </tr>
+
+        <tr>
+            <td>OWASP WSTG</td>
+            <td>Evaluar vulnerabilidades en aplicaciones web.</td>
+            <td>Ataque técnico</td>
+            <td>OWASP Foundation</td>
+            <td>Guía estructurada de pruebas web.</td>
+        </tr>
+
+        <tr>
+            <td>NIST SP 800-115</td>
+            <td>Evaluación formal de controles de seguridad.</td>
+            <td>Defensa / Auditoría</td>
+            <td>NIST</td>
+            <td>Guía técnica gubernamental.</td>
+        </tr>
+
+        <tr>
+            <td>OSSTMM</td>
+            <td>Medición objetiva de seguridad operativa.</td>
+            <td>Evaluación técnica</td>
+            <td>ISECOM</td>
+            <td>Metodología cuantificable.</td>
+        </tr>
+
+        <tr>
+            <td>PTES</td>
+            <td>Estandarizar el proceso de pentesting.</td>
+            <td>Ataque estructurado</td>
+            <td>Comunidad PTES</td>
+            <td>Proceso completo de pruebas.</td>
+        </tr>
+
+        <tr>
+            <td>ISSAF</td>
+            <td>Evaluar infraestructura y redes.</td>
+            <td>Evaluación técnica</td>
+            <td>OISSG</td>
+            <td>Marco detallado multidominio.</td>
+        </tr>
+
+    </table>
+
+    <h2>3. Análisis Comparativo</h2>
+
+    <ul>
+        <li><strong>MITRE ATT&CK</strong> se orienta a la detección y análisis de amenazas reales.</li>
+        <li><strong>OWASP WSTG</strong> es específico para aplicaciones web.</li>
+        <li><strong>NIST SP 800-115</strong> se utiliza en auditorías formales.</li>
+        <li><strong>OSSTMM</strong> prioriza métricas cuantificables.</li>
+        <li><strong>PTES</strong> estructura el proceso ofensivo completo.</li>
+        <li><strong>ISSAF</strong> integra evaluación de múltiples dominios.</li>
+    </ul>
+
+    <h2>4. Material Multimedia</h2>
+
+    <p>
+        <a href="177573-act05.pdf" download class="btn-pdf">
+            Descargar versión formal en PDF
+        </a>
+    </p>
+
+    <img src="assets/img/metodologias.png" alt="Comparación metodologías" width="100%">
+
+    <h2>5. Reflexión Técnica</h2>
+    <p>
+        La selección de una metodología depende del contexto organizacional,
+        el alcance de la evaluación y el objetivo del análisis.
+        En la práctica profesional, la combinación de varios marcos
+        permite obtener resultados más completos.
+    </p>
+
+    <p>
+        Comprender sus diferencias fortalece el criterio técnico
+        para diseñar evaluaciones alineadas con estándares internacionales.
+    </p>
+
+    <h2>6. Referencias Técnicas</h2>
+    <ul>
+        <li>MITRE ATT&CK Framework – attack.mitre.org</li>
+        <li>OWASP Web Security Testing Guide v4.2</li>
+        <li>NIST SP 800-115</li>
+        <li>OSSTMM 3 – ISECOM</li>
+        <li>Penetration Testing Execution Standard (PTES)</li>
+        <li>ISSAF – OISSG</li>
+    </ul>
+
+</div>
+
+<footer>
+    Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
+
+</body>
+</html>
