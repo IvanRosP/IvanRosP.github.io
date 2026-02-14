@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        .btn-pdf {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .btn-pdf:hover {
+            background-color: #1e40af;
+        }
+
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -173,7 +186,12 @@
 
     <h2>3. Material Multimedia</h2>
     <p>
-        (Aquí puedes agregar imágenes en la carpeta /assets/img)
+        <a href="act01-Equipo2.pdf" download>
+            <button class="btn-pdf">
+                Descargar versión formal en PDF
+            </button>
+        </a>
+
     </p>
 
     <img src="assets/img/diagrama-ataque.png" alt="Diagrama del ataque" width="100%">
@@ -196,10 +214,6 @@
         <li>MITRE ATT&CK Framework. https://attack.mitre.org</li>
         <li>INCIBE-CERT (2019). Reporte sobre ataque a PEMEX.</li>
     </ul>
-
-    <button onclick="window.print()" class="btn-pdf">
-        Exportar a PDF
-    </button>
 
 </div>
 
