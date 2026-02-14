@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 01 - Análisis de Ciberataque</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            border-left: 6px solid #2563eb;
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        .btn-pdf {
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 40px;
+        }
+
+        .btn-pdf:hover {
+            background-color: #1e40af;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1f2937;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media print {
+            .btn-pdf, footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ACTIVIDAD 01</h1>
+    <p>Análisis en grupo de un ciberataque real y su impacto empresarial</p>
+    <p><strong>Ivan Ros Padilla</strong></p>
+</header>
+
+<div class="container">
+
+    <h2>1. Introducción</h2>
+    <p>
+        En noviembre de 2019, <strong>Petróleos Mexicanos (PEMEX)</strong> fue víctima de un ataque de ransomware
+        ejecutado mediante la familia <strong>DoppelPaymer</strong>, atribuida al grupo criminal INDRIK SPIDER.
+        El incidente afectó miles de equipos dentro de la organización y paralizó procesos administrativos críticos.
+    </p>
+
+    <p>
+        Este caso representa un ejemplo real del impacto empresarial que puede generar una vulnerabilidad
+        no atendida y la ausencia de controles de seguridad adecuados.
+    </p>
+
+    <h2>2. Desarrollo Técnico</h2>
+
+    <h3>2.1 Vector de Ataque</h3>
+    <ul>
+        <li>Explotación de vulnerabilidad CVE-2019-0604 en Microsoft SharePoint.</li>
+        <li>Falta de actualización de sistemas legacy.</li>
+        <li>Ausencia de segmentación de red.</li>
+        <li>Débil monitoreo y detección temprana.</li>
+    </ul>
+
+    <h3>2.2 Cadena del Ataque</h3>
+
+    <table>
+        <tr>
+            <th>Fase</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Reconocimiento</td>
+            <td>Identificación de servidores vulnerables expuestos.</td>
+        </tr>
+        <tr>
+            <td>Acceso Inicial</td>
+            <td>Explotación de vulnerabilidad o phishing dirigido.</td>
+        </tr>
+        <tr>
+            <td>Persistencia</td>
+            <td>Uso de herramientas de escalamiento de privilegios.</td>
+        </tr>
+        <tr>
+            <td>Movimiento Lateral</td>
+            <td>Compromiso de múltiples equipos dentro del dominio.</td>
+        </tr>
+        <tr>
+            <td>Impacto</td>
+            <td>Cifrado masivo de sistemas críticos.</td>
+        </tr>
+    </table>
+
+    <h3>2.3 Impacto en el Modelo CIA</h3>
+
+    <table>
+        <tr>
+            <th>Principio</th>
+            <th>Impacto</th>
+        </tr>
+        <tr>
+            <td>Confidencialidad</td>
+            <td>Riesgo de filtración de información sensible.</td>
+        </tr>
+        <tr>
+            <td>Integridad</td>
+            <td>Cifrado y alteración de archivos críticos.</td>
+        </tr>
+        <tr>
+            <td>Disponibilidad</td>
+            <td>Interrupción de operaciones administrativas.</td>
+        </tr>
+    </table>
+
+    <h2>3. Material Multimedia</h2>
+    <p>
+        (Aquí puedes agregar imágenes en la carpeta /assets/img)
+    </p>
+
+    <img src="assets/img/diagrama-ataque.png" alt="Diagrama del ataque" width="100%">
+
+    <h2>4. Reflexión Técnica</h2>
+    <p>
+        El incidente demuestra que la principal vulnerabilidad no fue únicamente técnica,
+        sino organizacional. La falta de gestión de parches, segmentación de red y planes
+        de respuesta a incidentes permitió que el ataque escalara a nivel institucional.
+    </p>
+
+    <p>
+        La ciberseguridad debe considerarse un elemento estratégico dentro del gobierno
+        corporativo y no únicamente un componente tecnológico.
+    </p>
+
+    <h2>5. Referencias Técnicas</h2>
+    <ul>
+        <li>National Institute of Standards and Technology (NIST). (2008). SP 800-115.</li>
+        <li>MITRE ATT&CK Framework. https://attack.mitre.org</li>
+        <li>INCIBE-CERT (2019). Reporte sobre ataque a PEMEX.</li>
+    </ul>
+
+    <button onclick="window.print()" class="btn-pdf">
+        Exportar a PDF
+    </button>
+
+</div>
+
+<footer>
+    Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
+
+</body>
+</html>
