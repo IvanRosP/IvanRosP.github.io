@@ -1,35 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Proyecto Parcial 01</title>
+    <title>Proyecto 01 - Pentesting SnakeOil</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Estilo externo -->
     <link rel="stylesheet" href="../../estilo/actividades.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>PROYECTO PARCIAL 01</h1>
-        <p>Descripción del proyecto</p>
-        <p><strong>Ivan Ros Padilla</strong></p>
-    </header>
+<header>
+    <h1>PROYECTO 01</h1>
+    <p>Vulneración de Máquina Virtual SnakeOil</p>
+    <p><strong>Iván Ros Padilla</strong></p>
+</header>
 
-    <div class="container">
+<div class="container">
 
-        <h2>1. Introducción</h2>
-        <p>
-            [El contenido de tu proyecto irá aquí...]
-        </p>
+<h2>1. Introducción</h2>
+<p>
+Dentro del área de la seguridad informática, las pruebas de penetración permiten
+identificar vulnerabilidades presentes en sistemas antes de que puedan ser
+explotadas por actores maliciosos. Para desarrollar habilidades prácticas en
+este campo, existen plataformas como <strong>VulnHub</strong> que proporcionan
+máquinas virtuales intencionalmente vulnerables diseñadas para practicar
+técnicas de análisis y explotación.
+</p>
 
-    </div>
+<p>
+En este proyecto se realizó el proceso de análisis y explotación de la máquina
+virtual <strong>SnakeOil</strong>, la cual contiene múltiples vulnerabilidades
+que permiten obtener acceso al sistema mediante técnicas de enumeración,
+explotación y escalamiento de privilegios.
+</p>
 
-    <footer>
-        Universidad Politécnica de San Luis Potosí | Seguridad Informática
-    </footer>
+<h2>2. Desarrollo Técnico</h2>
+
+<h3>2.1 Preparación del Entorno</h3>
+<p>
+Para realizar la práctica se configuró un entorno virtual utilizando dos
+máquinas virtuales:
+</p>
+
+<ul>
+<li>Máquina atacante: Kali Linux.</li>
+<li>Máquina vulnerable: SnakeOil.</li>
+<li>Configuración de red: NAT privada para comunicación directa.</li>
+</ul>
+
+<p>
+La configuración de red permitió que ambas máquinas se comunicaran dentro de
+una red aislada, evitando interferencias con otras redes externas.
+</p>
+
+<h3>2.2 Reconocimiento y Enumeración</h3>
+
+<p>
+El primer paso del proceso consistió en identificar los servicios activos en
+la máquina vulnerable. Para ello se realizaron técnicas de reconocimiento de
+red con herramientas como:
+</p>
+
+<ul>
+<li>Escaneo de puertos.</li>
+<li>Identificación de servicios web.</li>
+<li>Búsqueda de directorios ocultos.</li>
+</ul>
+
+<p>
+Durante esta fase se detectó un servidor web activo dentro de la máquina
+vulnerable, el cual contenía diferentes directorios accesibles públicamente.
+Estos directorios permitieron identificar posibles puntos de entrada al sistema.
+</p>
+
+<h3>2.3 Acceso Inicial</h3>
+
+<p>
+Mediante la exploración de los directorios del servidor web se logró encontrar
+información que permitió obtener acceso a una <strong>shell dentro del sistema</strong>.
+Este acceso inicial permitió ejecutar comandos dentro del sistema operativo
+de la máquina vulnerable.
+</p>
+
+<h3>2.4 Escalamiento de Privilegios</h3>
+
+<p>
+Una vez dentro del sistema, se realizaron técnicas de enumeración local para
+identificar configuraciones incorrectas o vulnerabilidades que permitieran
+elevar los privilegios del usuario actual.
+</p>
+
+<p>
+Finalmente se logró obtener acceso a la cuenta <strong>root</strong>, lo cual
+representa el nivel máximo de privilegios dentro del sistema operativo.
+</p>
+
+<h2>3. Material Multimedia</h2>
+
+<p>
+El siguiente video muestra el procedimiento realizado durante la práctica
+de explotación de la máquina virtual SnakeOil.
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=VTzABHSM2ZY" target="_blank" class="btn-pdf">
+Ver demostración del proyecto
+</a>
+</p>
+
+<h2>4. Reflexión Técnica</h2>
+
+<p>
+Este proyecto permitió comprender de manera práctica cómo se desarrollan las
+pruebas de penetración en entornos controlados. A través de la exploración
+de servicios, enumeración de directorios y explotación de vulnerabilidades,
+se puede observar cómo un sistema mal configurado puede ser comprometido
+completamente.
+</p>
+
+<p>
+Las organizaciones deben aplicar medidas de seguridad como actualizaciones
+constantes, segmentación de red, monitoreo de actividad y auditorías de
+seguridad periódicas para reducir el riesgo de ataques reales.
+</p>
+
+<h2>5. Referencias Técnicas</h2>
+
+<ul>
+<li>VulnHub. Máquina vulnerable SnakeOil.</li>
+<li>https://www.vulnhub.com/entry/digitalworldlocal-snakeoil,738/</li>
+<li>Documentación sobre pruebas de penetración en entornos virtuales.</li>
+</ul>
+
+</div>
+
+<footer>
+Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
 
 </body>
-
 </html>
