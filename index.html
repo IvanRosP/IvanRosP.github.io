@@ -1,81 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-	  <title>Portafolio Seguridad Informatica</title>
-	  <meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="estilo/bootstrap.min.css">
-	  <link rel="stylesheet" href="estilo/sitio.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
-	<body>
-		<script src="script/funciones.js"></script>
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
+
+<head>
+	<title>Portafolio Seguridad Informatica</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="estilo/bootstrap.min.css">
+	<link rel="stylesheet" href="estilo/sitio.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<script src="script/funciones.js"></script>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
 			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>                        
-			  </button>
-			  <a class="navbar-brand" href="#">UPSLP</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">UPSLP</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-			  <ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/i/yo.html');return false;">Sobre mi</a></li>
-					  <li><a href="#" id="i_12" onclick="cargaPractica('html/i/materia.html');return false;">Sobre la materia</a></li>
-					  <li><a href="#" id="i_12" onclick="cargaPractica('html/i/pagina.html');return false;">Sobre la pagina</a></li>
-					  <li><a href="#" id="i_13" onclick="cargaPractica('html/i/contacto.html');return false;">Contactame</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Unidad 1<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/U1/actividad01.html');return false;">Actividad 1</a></li>
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/U1/actividad02.html');return false;">Actividad 2</a></li>
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/U1/actividad03.html');return false;">Actividad 3</a></li>
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/U1/actividad04.html');return false;">Actividad 4</a></li>
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/U1/actividad05.html');return false;">Actividad 5</a></li>
-					  <li><a href="#" id="i_11" onclick="cargaPractica('html/U1/actividad06.html');return false;">Actividad 6</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Unidad 2<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Unidad 3<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-					</ul>
-				</li>    
-			  </ul>
-			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Ene-Jun '26</a></li>
-			  </ul>
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Informacion<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" id="i_11" onclick="cargaPractica('html/i/yo.html');return false;">Sobre
+									mi</a></li>
+							<li><a href="#" id="i_12" onclick="cargaPractica('html/i/materia.html');return false;">Sobre
+									la materia</a></li>
+							<li><a href="#" id="i_12" onclick="cargaPractica('html/i/pagina.html');return false;">Sobre
+									la pagina</a></li>
+							<li><a href="#" id="i_13"
+									onclick="cargaPractica('html/i/contacto.html');return false;">Contactame</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Unidad 1<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad01.html');return false;">Actividad 1</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad02.html');return false;">Actividad 2</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad03.html');return false;">Actividad 3</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad04.html');return false;">Actividad 4</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad05.html');return false;">Actividad 5</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad06.html');return false;">Actividad 6</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U1/actividad07.html');return false;">Actividad 7</a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Unidad 2<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/U2/actividad08.html');return false;">Actividad 1</a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Unidad 3<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Proyectos<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/P/proyecto01.html');return false;">Proyecto parcial
+									1</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/P/proyecto02.html');return false;">Proyecto parcial
+									2</a>
+							</li>
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/P/proyecto03.html');return false;">Proyecto parcial
+									3</a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">ROAD TO HALL OF FAME<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" id="i_11"
+									onclick="cargaPractica('html/RHOF/actividad08.html');return false;">SQL
+									INJECTION</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Ene-Jun '26</a></li>
+				</ul>
 			</div>
-		  </div>
-		</nav>
-		<div class="container-fluid text-center">    
-		  <div class="row content">
+		</div>
+	</nav>
+	<div class="container-fluid text-center">
+		<div class="row content">
 			<div class="col-sm-2 sidenav">
 			</div>
-			<div class="col-sm-8 text-left" id="content" style="height: 800px"> 
+			<div class="col-sm-8 text-left" id="content" style="height: 800px">
 				<!-- Contenido -->
 			</div>
 			<div class="col-sm-2 sidenav">
 			</div>
-		  </div>
 		</div>
-		<footer class="container-fluid text-center">
-		  <p>177573 - Ivan Ros Padilla</p>
-		  <p>177573@upslp.edu.mx</p>
-		  <p>Ingeniería en Tecnologias de la Informacion</p>
-		  <p>CNO 5 - Seguridad Informática</p> 
-		</footer>
-	</body>
+	</div>
+	<footer class="container-fluid text-center">
+		<p>177573 - Ivan Ros Padilla</p>
+		<p>177573@upslp.edu.mx</p>
+		<p>Ingeniería en Tecnologias de la Informacion</p>
+		<p>CNO 5 - Seguridad Informática</p>
+	</footer>
+</body>
+
 </html>

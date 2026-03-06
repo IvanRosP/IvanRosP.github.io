@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Road To Hall Of Fame (SQL Injection)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../estilo/actividades.css">
+    <style>
+        .roadmap-container {
+            position: relative;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        /* The actual vertical line */
+        .roadmap-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #2563eb;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .roadmap-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .roadmap-item.left {
+            left: 0;
+        }
+
+        .roadmap-item.right {
+            left: 50%;
+        }
+
+        /* The circles on the timeline */
+        .roadmap-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid #f59e0b;
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .roadmap-item.left::after {
+            right: -10px;
+        }
+
+        .roadmap-item.right::after {
+            left: -10px;
+        }
+        
+        .roadmap-item:hover::after {
+            background-color: #f59e0b;
+            transform: scale(1.2);
+        }
+
+        .roadmap-content {
+            padding: 25px;
+            background-color: white;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #2563eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .roadmap-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .roadmap-content h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .lab-number {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #2563eb;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+        }
+        
+        .roadmap-item.right .lab-number {
+            left: 20px;
+            right: auto;
+        }
+
+        .lab-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 0.9em;
+            color: #4b5563;
+        }
+        
+        .lab-meta span {
+            background-color: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin: 60px 0 30px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+        
+        .download-section h2 {
+            border: none;
+            color: white;
+            margin-top: 0;
+        }
+        
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #f59e0b;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            margin-top: 20px;
+        }
+        
+        .btn-download:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+        
+        .header-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .roadmap-container::after {
+                left: 31px;
+            }
+            .roadmap-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .roadmap-item.left, .roadmap-item.right {
+                left: 0;
+            }
+            .roadmap-item.left::after, .roadmap-item.right::after {
+                left: 21px;
+            }
+            .roadmap-item.left .lab-number, .roadmap-item.right .lab-number {
+                right: 20px;
+                left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ROAD TO HALL OF FAME</h1>
+    <p class="header-subtitle">SQL Injection (PortSwigger Web Security Academy)</p>
+    <p><strong>Seguridad Informática II - Equipo 2</strong></p>
+</header>
+
+<div class="container" style="background: transparent; box-shadow: none;">
+    
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="border: none; text-align: center; margin-bottom: 15px; font-size: 2em; color: #1e3a8a;">Ruta de Progreso</h2>
+        <p style="font-size: 1.1em; color: #4b5563; max-width: 700px; margin: 0 auto;">
+            Esta ruta documenta de manera estructurada la resolución de los laboratorios sobre inyección SQL,
+            abarcando desde las técnicas fundamentales (In-band) hasta vulnerabilidades avanzadas (Blind y OAST).
+        </p>
+    </div>
+
+    <div class="roadmap-container">
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>SQL injection vulnerability in WHERE clause allowing retrieval of</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Apprentice</span>
+                    <span><strong>Tipo:</strong> In-band (Basada en lógica booleana)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP dirigida al servidor utilizando la herramienta Burp</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para su análisis</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se localiza el parámetro vulnerable, category, dentro de la cadena de consulta</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se inyecta una secuencia de caracteres lógicos (payload) directamente en el</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se transmite la solicitud modificada al servidor para evaluar el comportamiento</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>Se analiza la respuesta devuelta por el servidor. Se constata la recepción de un</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>SQL injection vulnerability allowing login bypass</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Apprentice</span>
+                    <span><strong>Tipo:</strong> In-band (Evasión de Autenticación / Logic Bypass)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP de tipo POST dirigida a la ruta de autenticación</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para facilitar</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se localiza el parámetro username dentro del cuerpo de la petición y se</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se asigna un valor arbitrario al parámetro password, dado que la lógica de</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se transmite la petición manipulada al servidor web.</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>Se analiza la respuesta del servidor, observando la recepción de un código de</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>SQL injection attack, querying the database type and version on</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP dirigida al servidor utilizando Burp Suite Proxy,</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para su análisis</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se ejecuta una fase de reconocimiento inyectando valores nulos para deducir la</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se determina que la consulta legítima devuelve exactamente dos columnas al</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se verifica la compatibilidad de los tipos de datos insertando caracteres</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>Se construye y ejecuta la carga útil (payload) final dirigida a la vista del sistema</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 7</span>
+                <h3>Se inspecciona el código fuente de la respuesta del servidor, verificando la</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>SQL injection attack, querying the database type and version</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP dirigida al servidor utilizando Burp Suite</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para su</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se realizan pruebas de inyección utilizando la cláusula UNION para</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se inyecta una carga útil (payload) diseñada específicamente para</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se analiza el código renderizado en la respuesta del servidor, confirmando</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>SQL injection attack, listing the database contents on non-Oracle</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP dirigida al servidor utilizando Burp Suite</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para su</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se inyecta un primer payload dirigido a la vista estándar de metadatos</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se analiza la respuesta del servidor, identificando entre los resultados una</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>S e i n y e c t a u n s e g u n d o p a y l o a d d i r i g i d o a l a v i s t a</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>Se examina la nueva respuesta del servidor, logrando identificar las</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 7</span>
+                <h3>Se diseña y envía un tercer payload final para extraer directamente el</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 8</span>
+                <h3>Se analiza la respuesta del servidor para confirmar el éxito de la</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 9</span>
+                <h3>Se utilizan dichas credenciales en el portal de autenticación de la</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>SQL injection attack, listing the database contents on Oracle</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP dirigida al servidor utilizando Burp Suite</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para su</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se determina el número exacto de columnas devueltas por la consulta</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se verifica que ambas columnas admiten datos de tipo texto mediante la</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se extrae el listado maestro de tablas del sistema consultando la vista</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>Se enumeran las columnas específicas de la tabla descubierta consultando</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 7</span>
+                <h3>Se ejecuta la inyección final para volcar el contenido de dichas columnas,</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 8</span>
+                <h3>Se utiliza la contraseña extraída perteneciente al usuario administrator</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 7</span>
+                <h3>SQL injection UNION attack, determining the number of columns</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP (método GET) dirigida al servidor web</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se procede a manipular el parámetro category inyectando el operador SQL</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se inyecta inicialmente el payload de prueba para una sola columna</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se incrementa el número de columnas en la inyección. Al probar con dos</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 6</span>
+                <h3>F i n a l m e n t e , a l i nye c t a r e l p ay l o a d p a r a t re s c o l u m n a s</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 8</span>
+                <h3>SQL injection UNION attack, finding a column containing text</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 1</span>
+                <h3>Se intercepta la petición HTTP dirigida al servidor utilizando Burp Suite</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 2</span>
+                <h3>Se envía la petición interceptada a la herramienta Burp Repeater para su</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 3</span>
+                <h3>Se inyecta un vector de prueba inicial en el parámetro category para</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 4</span>
+                <h3>Se procede a inyectar la cadena de texto objetivo en cada una de las</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 5</span>
+                <h3>Se analiza la respuesta del servidor ante cada intento: al introducir el</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Desconocido</span>
+                    <span><strong>Tipo:</strong> Desconocido</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 9</span>
+                <h3>SQL injection UNION attack, retrieving data from other tables</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 10</span>
+                <h3>SQL injection UNION attack, retrieving multiple values in a single</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (UNION-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 11</span>
+                <h3>Blind SQL injection with conditional responses</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> Blind (Boolean-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 12</span>
+                <h3>Blind SQL injection with conditional errors</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> Blind (Errores Condicionales / Conditional Errors)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 13</span>
+                <h3>Visible error-based SQL injection</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> In-band (Error-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 14</span>
+                <h3>Blind SQL injection with time delays</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> Blind (Time-based)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 15</span>
+                <h3>Blind SQL injection with time delays and information retrieval</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> Blind (Time-based / Inyección Ciega Basada en Tiempo)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <span class="lab-number">Lab 16</span>
+                <h3>Blind SQL injection with out-of-band interaction</h3>
+                <div class="lab-meta">
+                    <span><strong>Nivel:</strong> Practitioner</span>
+                    <span><strong>Tipo:</strong> Out-of-band (OAST - Out-of-band Application Security Testing)</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="download-section">
+        <h2>Documentación Completa</h2>
+        <p>Descarga el reporte detallado que incluye la justificación técnica, procedimientos paso a paso, payloads utilizados y estrategias de mitigación para los 16 laboratorios.</p>
+        <a href="act08-Equipo2.pdf" class="btn-download" download>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Descargar Documento PDF
+        </a>
+    </div>
+
+</div>
+
+<footer>
+    Universidad Politécnica de San Luis Potosí | Seguridad Informática
+</footer>
+
+</body>
+</html>
