@@ -202,6 +202,435 @@
             position: absolute;
             left: 0;
         }
+
+        /* --- Quiz Styles --- */
+        #quiz-container {
+            position: relative;
+            min-height: 500px;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .quiz-view {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .quiz-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Consent & Score Screens */
+        .consent-content,
+        .score-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Email Interface */
+        .email-layout {
+            display: flex;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 550px;
+        }
+
+        .email-sidebar {
+            width: 200px;
+            background-color: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+
+        .sidebar-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #475569;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .sidebar-item.active {
+            background-color: #e0e7ff;
+            color: #1d4ed8;
+            font-weight: 500;
+            border-left: 4px solid #2563eb;
+        }
+
+        .email-read-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            /* overflow-y: auto removed from here */
+            height: 100%;
+        }
+
+        .scenario-counter {
+            padding: 10px 20px;
+            background-color: #f1f5f9;
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .email-header-view {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            flex-shrink: 0;
+        }
+
+        .email-subject {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+        .email-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .sender-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .sender-name-wrap {
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .sender-name {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1.05rem;
+        }
+
+        .sender-email {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .recipient {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        .email-date {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .email-body-content {
+            padding: 20px 30px;
+            flex: 1;
+            font-family: Arial, Helvetica, sans-serif;
+            /* Emular fuente típica de email */
+            color: #334155;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            overflow-wrap: break-word;
+            /* Prevent text overflow */
+            overflow-y: auto;
+            /* Scroll only inside the body */
+        }
+
+        /* Enlaces falsos en el correo */
+        .phishing-link {
+            color: #2563eb;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* Action Panel */
+        .action-panel {
+            padding: 15px 30px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            flex-shrink: 0;
+            /* Keep it at the bottom */
+            margin-top: auto;
+        }
+
+        .action-prompt {
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .btn-phishing {
+            background-color: #fee2e2;
+            color: #ef4444;
+            border-color: #fecaca;
+        }
+
+        .btn-phishing:hover {
+            background-color: #fca5a5;
+            color: white;
+            border-color: #fca5a5;
+        }
+
+        .btn-legit {
+            background-color: #d1fae5;
+            color: #10b981;
+            border-color: #bbf7d0;
+        }
+
+        .btn-legit:hover {
+            background-color: #6ee7b7;
+            color: white;
+            border-color: #6ee7b7;
+        }
+
+        /* Feedback Modal */
+        .feedback-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+        }
+
+        .feedback-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .feedback-modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .feedback-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .feedback-header.success {
+            background-color: #10b981;
+        }
+
+        .feedback-header.error {
+            background-color: #ef4444;
+        }
+
+        .feedback-header.info {
+            background-color: #3b82f6;
+        }
+
+        .feedback-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .feedback-body {
+            padding: 30px;
+        }
+
+        .feedback-details {
+            background-color: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .feedback-details h4 {
+            margin: 0 0 10px 0;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .feedback-details ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        .feedback-details li {
+            margin-bottom: 5px;
+        }
+
+        .btn-next {
+            width: 100%;
+            padding: 12px;
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-next:hover {
+            background-color: #1e293b;
+        }
+
+        /* Score screen elements */
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#2563eb 0%, #e2e8f0 0%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .score-number {
+            position: relative;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1;
+        }
+
+        .score-label {
+            position: relative;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .score-evaluation {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .score-evaluation.excellent {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .score-evaluation.good {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+        }
+
+        .score-evaluation.needs-improvement {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
     </style>
 </head>
 
@@ -385,23 +814,187 @@
             </div>
         </div>
 
-        <!-- OBJETIVO ESPECIFICO 2 (PENDIENTE) -->
-        <div class="card pending">
+        <!-- OBJETIVO ESPECIFICO 2 (PHISHING QUIZ) -->
+        <div class="card" id="quiz-section">
             <div class="card-header">
-                <h2>2. Diseño de Simulación Interactiva (Quiz)</h2>
-                <span class="badge-pending">Próximamente</span>
+                <h2>2. Simulación Interactiva: Phishing Quiz</h2>
             </div>
-            <div class="card-body pending-content">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                    stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                    style="margin-bottom: 15px;">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                <p><strong>Diseñar e implementar una simulación interactiva tipo Phishing Quiz.</strong></p>
-                <p style="font-size: 0.9rem; margin-top: 10px;">Esta sección estará compuesta por 10 escenarios
-                    realistas de ingeniería social, incorporando criterios de evaluación, retroalimentación formativa y
-                    un sistema de puntuación individual. Actualmente se encuentra en fase de desarrollo.</p>
+            <div class="card-body" style="padding: 0; position: relative;">
+
+                <div id="quiz-container">
+
+                    <!-- Pantalla de Consentimiento -->
+                    <div id="consent-screen" class="quiz-view active">
+                        <div class="consent-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"
+                                fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" style="margin-bottom: 20px;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 15px; border:none;">Consentimiento Informado
+                            </h3>
+                            <p>Bienvenido/a a la simulación interactiva de Phishing. Esta herramienta es de
+                                <strong>carácter estrictamente educativo</strong> y tiene como objetivo evaluar y
+                                mejorar tu capacidad para identificar correos electrónicos engañosos (ingeniería
+                                social).
+                            </p>
+                            <p><strong>Por favor, lee con atención antes de comenzar:</strong></p>
+                            <ul
+                                style="text-align: left; background: #f8fafc; padding: 20px 40px; border-radius: 8px; margin: 20px 0;">
+                                <li>Se te presentarán 10 escenarios que simulan una bandeja de entrada real.</li>
+                                <li>Tu objetivo es analizar cada mensaje y decidir si es un correo
+                                    <strong>Legítimo</strong> o un intento de <strong>Phishing</strong>.
+                                </li>
+                                <li><strong>No se capturarán contraseñas ni datos sensibles reales.</strong> Los enlaces
+                                    simulados te redirigirán a retroalimentación educativa.</li>
+                                <li>Tus elecciones se utilizarán únicamente para calcular tu puntuación final en esta
+                                    sesión.</li>
+                            </ul>
+                            <button id="btn-start-quiz" class="btn-primary">Entiendo y acepto participar</button>
+                        </div>
+                    </div>
+
+                    <!-- Interfaz de Correo -->
+                    <div id="email-client" class="quiz-view">
+                        <div class="email-layout">
+                            <!-- Sidebar (Simulada) -->
+                            <div class="email-sidebar">
+                                <div class="sidebar-item active">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    Bandeja de entrada
+                                </div>
+                                <div class="sidebar-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    Pospuestos
+                                </div>
+                                <div class="sidebar-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                    Enviados
+                                </div>
+                            </div>
+
+                            <!-- Panel de Lectura (Escenario) -->
+                            <div class="email-read-panel">
+                                <div class="scenario-counter">Escenario <span id="current-scenario-num">1</span> de 10
+                                </div>
+
+                                <div class="email-header-view">
+                                    <div class="email-subject" id="email-subject">Asunto del correo simulado</div>
+                                    <div class="email-meta">
+                                        <div class="sender-info">
+                                            <div class="avatar" id="email-avatar">A</div>
+                                            <div class="sender-details">
+                                                <div class="sender-name-wrap">
+                                                    <span class="sender-name" id="email-sender-name">Nombre
+                                                        Remitente</span>
+                                                    <span class="sender-email"
+                                                        id="email-sender-address">&lt;correo@ejemplo.com&gt;</span>
+                                                </div>
+                                                <div class="recipient">Para: mi &lt;usuario@empresa.com&gt;</div>
+                                            </div>
+                                        </div>
+                                        <div class="email-date" id="email-date">Hoy, 10:30 AM</div>
+                                    </div>
+                                </div>
+
+                                <div class="email-body-content" id="email-body">
+                                    <!-- Contenido dinámico del correo -->
+                                </div>
+
+                                <div class="action-panel">
+                                    <p class="action-prompt">¿Qué harías con este correo?</p>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-phishing" onclick="evaluarRespuesta(true)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path
+                                                    d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                                                </path>
+                                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                            </svg>
+                                            Es Phishing
+                                        </button>
+                                        <button class="btn-action btn-legit" onclick="evaluarRespuesta(false)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            Es Legítimo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal de Retroalimentación -->
+                    <div id="feedback-overlay" class="feedback-overlay">
+                        <div class="feedback-modal">
+                            <div class="feedback-header" id="feedback-header">
+                                <span id="feedback-icon" class="feedback-icon">✓</span>
+                                <h3 id="feedback-title" style="margin: 0; color: white; border: none;">¡Correcto!</h3>
+                            </div>
+                            <div class="feedback-body">
+                                <p id="feedback-message"
+                                    style="font-size: 1.1rem; font-weight: 500; margin-bottom: 15px;">Mensaje principal.
+                                </p>
+                                <div class="feedback-details" id="feedback-details">
+                                    <h4>Señales a tomar en cuenta:</h4>
+                                    <ul id="feedback-flags">
+                                        <!-- Banderas rojas dinámicas -->
+                                    </ul>
+                                </div>
+                                <button class="btn-next" onclick="siguienteEscenario()">Siguiente escenario</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pantalla Final (Score) -->
+                    <div id="score-screen" class="quiz-view">
+                        <div class="score-content">
+                            <h3 style="font-size: 2rem; border: none; margin-bottom: 5px;">Resultados de Evaluación</h3>
+                            <p style="color: #64748b; margin-bottom: 30px;">Completaste la simulación interactiva.</p>
+
+                            <div class="score-circle">
+                                <div class="score-number" id="final-score">0/10</div>
+                                <div class="score-label">Aciertos</div>
+                            </div>
+
+                            <div class="score-evaluation" id="score-message">
+                                <!-- Mensaje evaluativo dinámico -->
+                            </div>
+
+                            <div class="score-stats"
+                                style="display: flex; gap: 20px; justify-content: center; margin-bottom: 30px;">
+                                <div class="metric-box" style="margin:0; padding:15px; flex: 1;">
+                                    <strong id="stat-phishing-caught">0</strong>
+                                    Phishing Detectado
+                                </div>
+                                <div class="metric-box" style="margin:0; padding:15px; flex: 1;">
+                                    <strong id="stat-false-positives">0</strong>
+                                    Falsos Positivos
+                                </div>
+                            </div>
+
+                            <button class="btn-primary" onclick="reiniciarQuiz()">Volver a intentar</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -434,6 +1027,397 @@
         Universidad Politécnica de San Luis Potosí | Seguridad Informática
     </footer>
 
+    <script>
+        // --- Datos de los 10 Escenarios ---
+        const escenarios = [
+            {
+                // Escenario 1: Urgencia RRHH (Phishing)
+                isPhishing: true,
+                subject: "URGENTE: Actualización obligatoria de nómina",
+                senderName: "Recursos Humanos",
+                senderEmail: "rrhh@empresa-portal.com",
+                avatar: "R",
+                date: "Hoy, 08:15 AM",
+                body: `
+                    <p>Estimado empleado,</p>
+                    <p>Hemos detectado un error en el procesamiento de tu cuenta de nómina para el próximo pago. Si no actualizas tu información bancaria en las próximas 2 horas, tu salario podría ser retenido.</p>
+                    <p>Por favor, ingresa al portal de empleados inmediatamente para verificar tus datos:</p>
+                    <p><a class="phishing-link" onclick="event.preventDefault();">-&gt; Portal de Nómina (Seguro) &lt;-</a></p>
+                    <p>Atentamente,<br>El equipo de Recursos Humanos</p>
+                `,
+                feedbackTitle: "¡Era Phishing!",
+                feedbackMessage: "Este correo utilizaba tácticas de urgencia y una dirección engañosa.",
+                flags: [
+                    "<strong>Dirección sospechosa:</strong> El dominio real de RRHH no suele ser 'empresa-portal.com'.",
+                    "<strong>Sentido de urgencia extrema:</strong> Amenaza con retener el salario en 2 horas para forzar una acción rápida.",
+                    "<strong>Enlace falso:</strong> El enlace no lleva a un sitio interno de la empresa conocido."
+                ]
+            },
+            {
+                // Escenario 2: Google Drive compartido (Phishing)
+                isPhishing: true,
+                subject: "Documento compartido continuo: 'Factura_Vencida_Proveedor.pdf'",
+                senderName: "Maria Contabilidad (Vía Google Drive)",
+                senderEmail: "no-reply-drive@gogle.com",
+                avatar: "M",
+                date: "Ayer, 16:45",
+                body: `
+                    <div style="border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+                        <p><strong>Maria Contabilidad</strong> ha compartido el siguiente documento contigo:</p>
+                        <h3 style="color: #1a73e8; margin-bottom: 5px;">Factura_Vencida_Proveedor_Abril.pdf</h3>
+                        <p style="color: #555; font-size: 0.9em; margin-top: 0;">2.4 MB</p>
+                        <p>"Por favor revisa esta factura urgente, está por ir a cobranza extrajudicial."</p>
+                        <div style="margin-top: 20px;">
+                            <a class="phishing-link" style="background:#1a73e8; color:white; padding:10px 15px; text-decoration:none; border-radius:4px;" onclick="event.preventDefault();">Abrir en Docs</a>
+                        </div>
+                    </div>
+                `,
+                feedbackTitle: "¡Era Phishing!",
+                feedbackMessage: "Se hizo pasar por una alerta legítima de Google Drive.",
+                flags: [
+                    "<strong>Dominio mal escrito:</strong> 'gogle.com' en lugar de 'google.com' (Typosquatting).",
+                    "<strong>Señal de Peligro:</strong> Facturas de procedencia dudosa son el principal vector de ransomware.",
+                    "<strong>Falso botón:</strong> El botón 'Abrir en Docs' es un truco visual para captar clics impulsivos."
+                ]
+            },
+            {
+                // Escenario 3: Legítimo TI
+                isPhishing: false,
+                subject: "Ventana de mantenimiento programada: Servidores VPN",
+                senderName: "Soporte TI",
+                senderEmail: "soporte-it@tuempresa.com",
+                avatar: "S",
+                date: "Ayer, 14:00",
+                body: `
+                    <p>Hola equipo,</p>
+                    <p>Les informamos que este viernes 25 de marzo, de 10:00 PM a 11:30 PM, llevaremos a cabo un mantenimiento programado en los servidores de la VPN.</p>
+                    <p>Durante este período, es posible que experimenten desconexiones temporales si están trabajando de forma remota.</p>
+                    <p>No es necesaria ninguna acción por su parte ni requerimos sus contraseñas. Si tienen dudas, abran un ticket en el portal interno.</p>
+                    <p>Saludos,<br>Soporte Técnico Corporativo</p>
+                `,
+                feedbackTitle: "¡Era un correo Legítimo!",
+                feedbackMessage: "Este es un aviso típico y seguro del área de tecnología.",
+                flags: [
+                    "<strong>Remitente interno verificado:</strong> Utiliza el dominio oficial (@tuempresa.com).",
+                    "<strong>Sin llamadas a la acción peligrosas:</strong> No pide clics urgentes, no pide contraseñas ni datos sensibles.",
+                    "<strong>Informativo:</strong> Aclara que no requiere acciones del usuario."
+                ]
+            },
+            {
+                // Escenario 4: Alerta de Microsoft (Phishing)
+                isPhishing: true,
+                subject: "Alerta de Seguridad: Inicio de sesión inusual bloqueado",
+                senderName: "Microsoft Outlook Security",
+                senderEmail: "alertas@microsoft-security-verify.net",
+                avatar: "M",
+                date: "Hoy, 03:22 AM",
+                body: `
+                    <p>Se ha detectado un inicio de sesión inusual en su cuenta desde una dirección IP extranjera (Moscú, Rusia).</p>
+                    <p>Para su seguridad, hemos suspendido temporalmente el envío de correos. Para restaurar el acceso y confirmar que fue usted, debe verificar su identidad inmediatamente.</p>
+                    <p><a class="phishing-link" onclick="event.preventDefault();">Revisar actividad reciente y desbloquear cuenta</a></p>
+                    <p><small style="color: #666;">Si ignora este mensaje, su cuenta se eliminará en 24 horas.</small></p>
+                `,
+                feedbackTitle: "¡Era Phishing!",
+                feedbackMessage: "Clásico ataque para robar credenciales de Office 365.",
+                flags: [
+                    "<strong>Falso dominio:</strong> 'microsoft-security-verify.net' no es propiedad de Microsoft.",
+                    "<strong>Táctica de miedo:</strong> 'su cuenta se eliminará en 24 horas' busca causar pánico.",
+                    "<strong>Acceso sospechoso a enlaces:</strong> Te redirige a un portal falso para robar tu contraseña."
+                ]
+            },
+            {
+                // Escenario 5: Directivo pidiendo favor (Whaling / Fraude del CEO)
+                isPhishing: true,
+                subject: "Necesito un favor rápido (Confidencial)",
+                senderName: "Director General",
+                senderEmail: "director.ceo@gmail.com",
+                avatar: "D",
+                date: "Hoy, 11:45 AM",
+                body: `
+                    <p>¿Estás disponible en este momento?</p>
+                    <p>Estoy en una junta importante todo el día y necesito comprar unas tarjetas de regalo (Apple/iTunes) para unos clientes clave hoy mismo. Necesito que me hagas el favor de comprarlas y raspar el código por detrás para enviarme la foto.</p>
+                    <p>Te reembolsaré el gasto esta misma tarde como viático especial.</p>
+                    <p>Respóndeme a este correo y te digo de qué monto comprarlas. Es urgente, pero mantenlo discreto.</p>
+                    <p>Enviado desde mi iPhone</p>
+                `,
+                feedbackTitle: "¡Era Phishing (Fraude del CEO)!",
+                feedbackMessage: "Ataque en el que se suplantan a altos directivos pidiendo compras rápidas.",
+                flags: [
+                    "<strong>Correo no corporativo:</strong> Usa una cuenta de '@gmail.com' en lugar del correo de la empresa.",
+                    "<strong>Solicitud inusual:</strong> Ningún directivo pedirá comprar tarjetas de regalo y mandar el código raspado.",
+                    "<strong>Exige secreto y rapidez:</strong> 'mantenlo discreto' y 'es urgente' buscan que no verifiques la petición con nadie más."
+                ]
+            },
+            {
+                // Escenario 6: Legítimo Actualización de Política
+                isPhishing: false,
+                subject: "Actualización de Política de Vacaciones 2024",
+                senderName: "Recursos Humanos",
+                senderEmail: "rrhh@tuempresa.com",
+                avatar: "R",
+                date: "Ayer, 09:00 AM",
+                body: `
+                    <p>A todos los colaboradores,</p>
+                    <p>El manual de políticas de vacaciones ha sido actualizado para cumplir con las nuevas regulaciones laborales vigentes a partir de este mes.</p>
+                    <p>Pueden leer y descargar el documento PDF directamente desde la intranet de la compañía (Sección Documentos > RRHH).</p>
+                    <p>Si tienen alguna duda sobre sus días acumulados, pueden agendar una llamada con su Generalista de RRHH asignado.</p>
+                    <p>Saludos cordiales.</p>
+                `,
+                feedbackTitle: "¡Era un correo Legítimo!",
+                feedbackMessage: "Comunica cambios internos sin solicitar datos confidenciales.",
+                flags: [
+                    "<strong>Canal seguro:</strong> Pide al usuario ir a la 'Intranet' por su cuenta en lugar de usar un enlace adjunto riesgoso.",
+                    "<strong>Correo institucional:</strong> Usa la dirección válida de la organización.",
+                    "<strong>Tono informativo:</strong> No hay amenazas, plazos urgentes ni peticiones inusuales."
+                ]
+            },
+            {
+                // Escenario 7: Oferta externa (Phishing)
+                isPhishing: true,
+                subject: "Felicidades! Has sido seleccionado para una prueba gratuita de iPhone 15",
+                senderName: "MercadoLibre Promociones",
+                senderEmail: "promos@mercadolibre-encuestas-participa.com",
+                avatar: "M",
+                date: "Lunes, 15:30",
+                body: `
+                    <p>¡Hola!</p>
+                    <p>Has sido seleccionado al azar como uno de los 5 afortunados para hacer una reseña del nuevo modelo de iPhone 15 Pro Max.</p>
+                    <p>A cambio de responder una encuesta de 2 minutos, te regalaremos el dispositivo. Solo tienes que pagar una mínima tarifa por los costos de envío ($39 MXN).</p>
+                    <p>¡No pierdas la oportunidad! La oferta expira en 5 minutos.</p>
+                    <p><a class="phishing-link" onclick="event.preventDefault();">Reclamar mi premio ahora</a></p>
+                `,
+                feedbackTitle: "¡Era Phishing!",
+                feedbackMessage: "El clásico señuelo del 'premio increíble' a cambio de una pequeña comisión.",
+                flags: [
+                    "<strong>Demasiado bueno para ser verdad:</strong> Nadie regala iPhones de última generación al azar.",
+                    "<strong>Solicita pago:</strong> Piden una pequeña 'tarifa de envío' para robar los datos de tu tarjeta de crédito.",
+                    "<strong>Cuenta regresiva falsa:</strong> 'expira en 5 minutos' para forzar al cerebro al pánico FOMO."
+                ]
+            },
+            {
+                // Escenario 8: Cuenta bancaria suspendida (Phishing)
+                isPhishing: true,
+                subject: "[ALERTA] Movimiento retenido en su banca móvil BBVA",
+                senderName: "Bancomer / BBVA Respuesta",
+                senderEmail: "alertas@bbva-seguridad-bmovil.mx",
+                avatar: "B",
+                date: "Lunes, 18:05",
+                body: `
+                    <p>Estimado cuentahabiente</p>
+                    <p>El día de hoy se intentó realizar una transferencia por $4,500.00 MXN a un destinatario no registrado desde su Token Móvil.</p>
+                    <p>Por prevencion de fraude, hemos bloqueado la transacción y su aplicación móvil.</p>
+                    <p>Si usted no reconoce este movimiento, debe cancelar el cargo Inmediatamente haciendo clic en el enlace de abajo y sincronizando su Token de Seguridad.</p>
+                    <p><a class="phishing-link" onclick="event.preventDefault();">Cancelar Cargo No Reconocido</a></p>
+                `,
+                feedbackTitle: "¡Era Phishing!",
+                feedbackMessage: "Juega con el miedo a perder dinero en una cuenta bancaria.",
+                flags: [
+                    "<strong>Remitente genérico:</strong> Saluda como 'Estimado cuentahabiente' en lugar de usar el nombre completo que el banco real usaría.",
+                    "<strong>Remitente engañoso:</strong> El dominio termina en dominios largos o inexactos como '-bmovil.mx'.",
+                    "<strong>Carga emocional alta:</strong> Intenta causar pánico sobre una compra grande no reconocida."
+                ]
+            },
+            {
+                // Escenario 9: Invitación a evento (Legítimo)
+                isPhishing: false,
+                subject: "Invitación: Town Hall Mensual y Resultados Financieros Q3",
+                senderName: "Comunicación Interna",
+                senderEmail: "comunicacion@tuempresa.com",
+                avatar: "C",
+                date: "Martes, 10:00",
+                body: `
+                    <p>Hola a todos,</p>
+                    <p>Están cordialmente invitados a nuestra reunión "Town Hall" mensual este próximo jueves a la 1:00 PM (hora centro).</p>
+                    <p>Nuestro CEO presentará los resultados financieros del Q3 y los planes para el cierre de año. Habrá una sesión de Q&A de 15 minutos al final.</p>
+                    <p>La cita de calendario ha sido enviada a sus bandejas de Outlook, desde donde pueden unirse directamente al enlace de Teams.</p>
+                    <p>¡Esperamos contar con su participación!</p>
+                `,
+                feedbackTitle: "¡Era un correo Legítimo!",
+                feedbackMessage: "Comunicación estándar sobre la cultura o rutinas de la empresa.",
+                flags: [
+                    "<strong>Uso de herramientas aprobadas:</strong> Remite a usar el calendario de Outlook y Teams corporativo.",
+                    "<strong>Tono amigable y descriptivo:</strong> Brinda valor sin coaccionar al empleado.",
+                    "<strong>Remitente oficial:</strong> Cuenta corporativa confiable."
+                ]
+            },
+            {
+                // Escenario 10: Falso Recibo de Suscripción (Phishing)
+                isPhishing: true,
+                subject: "Recibo de Netflix: Tu suscripción anual ha sido procesada",
+                senderName: "Netflix Support",
+                senderEmail: "billing@neflix-support-team.com",
+                avatar: "N",
+                date: "Miércoles, 07:12 AM",
+                body: `
+                    <p>Hola,</p>
+                    <p>Gracias por mantener tu suscripción. Tu plan se ha renovado automáticamente por el monto de $2,399.00 MXN anuales.</p>
+                    <p>El cargo aparecerá en tu estado de cuenta en 1-2 días hábiles.</p>
+                    <p>¿No autorizaste este pago? Tienes 24 horas para disputarlo y obtener un reembolso en el siguiente enlace del Centro de Resoluciones de PayPal / Netflix:</p>
+                    <p><a class="phishing-link" onclick="event.preventDefault();">Disputar pago y solicitar Reembolso Inmediato</a></p>
+                `,
+                feedbackTitle: "¡Era Phishing!",
+                feedbackMessage: "El engaño del recibo por un servicio de streaming de alto costo.",
+                flags: [
+                    "<strong>Dominio falso:</strong> 'neflix-support-team.com' falta una 't' en Netflix y no es el dominio oficial de cobro.",
+                    "<strong>Estrategia de reembolso:</strong> Figen un cobro alto para que intentes cancelarlo y pedir el 'reembolso', donde te robarán los datos bancarios.",
+                    "<strong>Urgencia encubierta:</strong> 'Tienes 24 horas para disputarlo'."
+                ]
+            }
+        ];
+
+        // --- Estado del Quiz ---
+        let currentScenarioIndex = 0;
+        let score = 0;
+        let falsePositives = 0; // Marcar como correo peligroso a los legÍtimos
+        let totalPhishing = 7; // Tenemos 7 escenarios que son true, 3 que son false
+
+        // --- Variables de UI ---
+        const consentScreen = document.getElementById('consent-screen');
+        const emailClient = document.getElementById('email-client');
+        const scoreScreen = document.getElementById('score-screen');
+
+        const feedbackOverlay = document.getElementById('feedback-overlay');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const feedbackFlags = document.getElementById('feedback-flags');
+        const feedbackHeader = document.getElementById('feedback-header');
+        const feedbackIcon = document.getElementById('feedback-icon');
+
+        // --- Event Listeners ---
+        document.getElementById('btn-start-quiz').addEventListener('click', iniciarQuiz);
+
+        // --- Funciones del Quiz ---
+        function iniciarQuiz() {
+            currentScenarioIndex = 0;
+            score = 0;
+            falsePositives = 0;
+
+            consentScreen.classList.remove('active');
+            scoreScreen.classList.remove('active');
+            emailClient.classList.add('active');
+
+            cargarEscenario(currentScenarioIndex);
+        }
+
+        function cargarEscenario(index) {
+            const escenario = escenarios[index];
+
+            // Actualizar contadores y metadata visual
+            document.getElementById('current-scenario-num').innerText = index + 1;
+            document.getElementById('email-subject').innerText = escenario.subject;
+            document.getElementById('email-sender-name').innerText = escenario.senderName;
+            document.getElementById('email-sender-address').innerText = `<${escenario.senderEmail}>`;
+            document.getElementById('email-avatar').innerText = escenario.avatar;
+            document.getElementById('email-date').innerText = escenario.date;
+
+            // Cargar cuerpo HTML
+            document.getElementById('email-body').innerHTML = escenario.body;
+        }
+
+        function evaluarRespuesta(userSancionaComoPhishing) {
+            const escenarioActual = escenarios[currentScenarioIndex];
+            const esEnRealidadPhishing = escenarioActual.isPhishing;
+
+            // Ver si se equivocó o acertó
+            const esCorrecto = (userSancionaComoPhishing === esEnRealidadPhishing);
+
+            if (esCorrecto) {
+                if (esEnRealidadPhishing) {
+                    score++; // Puntuó bien identificando una amenaza
+                }
+                configurarFeedback(true, escenarioActual);
+            } else {
+                if (!esEnRealidadPhishing && userSancionaComoPhishing) {
+                    falsePositives++; // Pánico: marcó algo bueno como malo
+                }
+                configurarFeedback(false, escenarioActual);
+            }
+
+            mostrarFeedback();
+        }
+
+        function configurarFeedback(esCorrecto, escenario) {
+            // Limpiamos estilos previos
+            feedbackHeader.className = 'feedback-header';
+
+            if (esCorrecto) {
+                feedbackHeader.classList.add('success');
+                feedbackTitle.innerText = escenario.isPhishing ? "¡Bien Visto! Evaluado Correctamente." : "¡Excelente! Correo Seguro.";
+                feedbackIcon.innerText = "✓";
+            } else {
+                // Se equivocó
+                if (escenario.isPhishing) {
+                    // Caída en trampa
+                    feedbackHeader.classList.add('error');
+                    feedbackTitle.innerText = "¡Cuidado! Caíste en la trampa.";
+                    feedbackIcon.innerText = "!";
+                } else {
+                    // Falso positivo
+                    feedbackHeader.classList.add('info');
+                    feedbackTitle.innerText = "Era seguro. Falsa alarma.";
+                    feedbackIcon.innerText = "i";
+                }
+            }
+
+            feedbackMessage.innerText = escenario.feedbackMessage;
+
+            // Llenar flags
+            feedbackFlags.innerHTML = '';
+            escenario.flags.forEach(flag => {
+                const li = document.createElement('li');
+                li.innerHTML = flag;
+                feedbackFlags.appendChild(li);
+            });
+        }
+
+        function mostrarFeedback() {
+            feedbackOverlay.classList.add('active');
+        }
+
+        function siguienteEscenario() {
+            feedbackOverlay.classList.remove('active');
+
+            currentScenarioIndex++;
+            if (currentScenarioIndex < escenarios.length) {
+                cargarEscenario(currentScenarioIndex);
+            } else {
+                finalizarQuiz();
+            }
+        }
+
+        function finalizarQuiz() {
+            emailClient.classList.remove('active');
+            scoreScreen.classList.add('active');
+
+            // Llenar datos finales
+            document.getElementById('final-score').innerText = `${score}/${totalPhishing}`;
+            document.getElementById('stat-phishing-caught').innerText = score;
+            document.getElementById('stat-false-positives').innerText = falsePositives;
+
+            const evalDiv = document.getElementById('score-message');
+            evalDiv.className = 'score-evaluation'; // Reset
+
+            const percepcionGral = score - falsePositives;
+
+            if (score === totalPhishing && falsePositives === 0) {
+                evalDiv.classList.add('excellent');
+                evalDiv.innerHTML = "<strong>¡Excepcional!</strong> Tienes un ojo clínico para detectar amenazas. Identificaste correctamente todos los ataques sin bloquear correos legítimos.";
+            } else if (score >= 5) {
+                evalDiv.classList.add('good');
+                evalDiv.innerHTML = "<strong>Buen trabajo.</strong> Detectaste la mayoría de los intentos de Phishing, pero los atacantes reales solo necesitan que te equivoques una vez. Sigue practicando las banderas rojas.";
+            } else {
+                evalDiv.classList.add('needs-improvement');
+                evalDiv.innerHTML = "<strong>Alto Riesgo.</strong> Fuiste víctima de múltiples simulaciones. Es fundamental que reduzcas tu velocidad, verifiques los dominios y nunca entres a enlaces sospechosos o compartas datos sensibles.";
+            }
+
+            // Desplazar vista hacia arriba para centrar resultados
+            document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function reiniciarQuiz() {
+            iniciarQuiz();
+        }
+    </script>
 </body>
 
 </html>
