@@ -1011,14 +1011,41 @@
         </div>
 
         <!-- OBJETIVO ESPECIFICO 3 (SISTEMA DE SCORE GLOBAL) -->
-        <div class="card pending" id="scoreboard-section">
+        <div class="card" id="scoreboard-section">
             <div class="card-header">
                 <h2>3. Sistema de Score Global e Interpretación</h2>
-                <span class="badge-pending">En Construcción</span>
             </div>
-            <div class="card-body pending-content">
-                <p>Esta sección se encuentra actualmente en desarrollo. Pronto podrás visualizar el tablero de
-                    puntuaciones globales y análisis estadísticos.</p>
+            <div class="card-body">
+                <p>A continuación se muestra el ranking global de los participantes, junto con métricas analíticas calculadas a partir de sus resultados y tiempos de respuesta.</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <strong id="stat-global-average">--%</strong>
+                        Precisión Promedio Global
+                    </div>
+                    <div class="metric-box">
+                        <strong id="stat-hardest-scenario">-</strong>
+                        Escenario con Más Fallos
+                    </div>
+                </div>
+
+                <div class="modern-table-wrapper" id="ranking-table" style="transition: opacity 0.3s;">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; width: 60px;">#</th>
+                                <th>Alias</th>
+                                <th style="text-align: center;">Aciertos</th>
+                                <th style="text-align: center;">Errores</th>
+                                <th style="text-align: center;">Tiempo Prom.</th>
+                                <th style="text-align: center;">Escenario más Lento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-body">
+                            <!-- Datos dinámicos -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -1028,6 +1055,7 @@
         Universidad Politécnica de San Luis Potosí | Seguridad Informática
     </footer>
 
+    <script src="participantes.js"></script>
     <script>
         // --- Datos de los 10 Escenarios ---
         const escenarios = [
@@ -1273,6 +1301,9 @@
         let falsePositives = 0; // Marcar como correo peligroso a los legÍtimos
         let totalEscenarios = 10;
         let userAlias = ""; // Alias del participante
+        let startTime = 0;
+        let scenarioStartTimes = [];
+        let scenarioDurations = [];
 
         // --- Variables de UI ---
         const consentScreen = document.getElementById('consent-screen');
@@ -1293,12 +1324,20 @@
         function iniciarQuiz() {
             // Guardar el alias ingresado
             const aliasInput = document.getElementById('user-alias');
-            userAlias = aliasInput && aliasInput.value ? aliasInput.value.trim() : "Anónimo";
+            userAlias = aliasInput && aliasInput.value ? aliasInput.value.trim() : "";
+            
+            if (!userAlias || userAlias.length < 3) {
+                document.getElementById('alias-error').style.display = 'block';
+                return;
+            }
+            document.getElementById('alias-error').style.display = 'none';
 
             currentScenarioIndex = 0;
             score = 0;
             phishingCaught = 0;
             falsePositives = 0;
+            scenarioDurations = [];
+            scenarioStartTimes = [];
 
             consentScreen.classList.remove('active');
             scoreScreen.classList.remove('active');
@@ -1312,6 +1351,9 @@
 
         function cargarEscenario(index) {
             const escenario = escenarios[index];
+
+            // Iniciar tiempo para este escenario específico
+            scenarioStartTimes[index] = Date.now();
 
             // Actualizar contadores y metadata visual
             document.getElementById('current-scenario-num').innerText = index + 1;
@@ -1328,6 +1370,10 @@
         function evaluarRespuesta(userSancionaComoPhishing) {
             const escenarioActual = escenarios[currentScenarioIndex];
             const esEnRealidadPhishing = escenarioActual.isPhishing;
+
+            // Evaluar tiempo que tardó
+            const durationSecs = (Date.now() - scenarioStartTimes[currentScenarioIndex]) / 1000;
+            scenarioDurations.push({ index: currentScenarioIndex, duration: durationSecs });
 
             // Ver si se equivocó o acertó
             const esCorrecto = (userSancionaComoPhishing === esEnRealidadPhishing);
@@ -1444,8 +1490,12 @@
                 evalDiv.innerHTML = "<strong>Alto Riesgo.</strong> Fuiste víctima de múltiples simulaciones. Es fundamental que reduzcas tu velocidad, verifiques los dominios y nunca entres a enlaces sospechosos o compartas datos sensibles.";
             }
 
-            // GUARDAR DATOS EN JSONBIN PARA EL SCOREBOARD GLOBAL
-            guardarResultadoGlobal(aciertos, errores, totalTimeSeconds, listaFallos);
+            // GUARDAR DATOS PARA EL SCOREBOARD GLOBAL
+            let longestScenarioObj = scenarioDurations.reduce((max, obj) => obj.duration > max.duration ? obj : max, scenarioDurations[0]);
+            let lsIndex = longestScenarioObj ? longestScenarioObj.index + 1 : 1;
+            
+            let avgTime = totalTimeSeconds > 0 ? (totalTimeSeconds / totalEscenarios).toFixed(1) : 0;
+            guardarResultadoGlobal(aciertos, errores, avgTime, listaFallos, lsIndex);
 
             // Desplazar vista hacia arriba para centrar resultados
             document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth' });
@@ -1471,96 +1521,94 @@
         const JSONBIN_KEY = "$2a$10$xXckhLgFwXo1Ezd5Nh1DZebWu6LiwJ2WYMOv1RoMaKuQtaNpfZJHy";
         const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
 
-        // Generamos un pool de usuarios falsos por si la API falla o está vacía
-        const simulatedUsers = [
-            { alias: "Jefatura.Ventas", aciertos: 4, errores: 6, avgTime: 2.1, timestamp: Date.now() - 86000000, fallos: [1, 2, 5, 7, 8, 9] },
-            { alias: "IT_Support_Mike", aciertos: 10, errores: 0, avgTime: 3.8, timestamp: Date.now() - 172000000, fallos: [] },
-            { alias: "DevOps_Sara", aciertos: 9, errores: 1, avgTime: 4.5, timestamp: Date.now() - 60000000, fallos: [6] },
-            { alias: "Admin.Contable", aciertos: 7, errores: 3, avgTime: 12.5, timestamp: Date.now() - 4000000, fallos: [2, 8, 9] },
-            { alias: "NuevoIngreso_Rec", aciertos: 5, errores: 5, avgTime: 1.5, timestamp: Date.now() - 3000000, fallos: [0, 2, 3, 4, 8] }
-        ];
+        // Datos iniciales de fallback en caso de que el JSONBin estuviera vacío la primera vez
+        let baseDataFallback = typeof usuariosParticipantes !== 'undefined' ? [...usuariosParticipantes] : [];
 
         async function obtenerRankingGlobal() {
             try {
                 const response = await fetch(JSONBIN_URL, {
                     method: 'GET',
-                    headers: {
-                        'X-Access-Key': JSONBIN_KEY
-                    }
+                    headers: { 'X-Access-Key': JSONBIN_KEY }
                 });
 
-                if (!response.ok && response.status !== 304) {
-                    throw new Error("Error al consultar JSONBin");
+                if (!response.ok) {
+                    throw new Error("Error al consultar JSONBin HTTP Status: " + response.status);
                 }
 
                 const data = await response.json();
                 let ranking = data.record;
 
-                // Si está vacío, inyectamos la semilla
-                if (!ranking || ranking.length === 0) {
-                    return [...simulatedUsers];
+                if (!ranking || !Array.isArray(ranking) || ranking.length === 0) {
+                    return baseDataFallback;
                 }
 
                 return ranking;
             } catch (error) {
-                console.error("No se pudo obtener el Score global de la API. Usando datos locales.", error);
-
-                // Fallback a LocalStorage en caso de error de red
-                const localData = localStorage.getItem('phishingQuizGlobalRankingFallback');
+                console.error("No se pudo obtener el Score global de la API. Mostrando datos por defecto/locales.", error);
+                const localData = localStorage.getItem('phishingQuizLocalData');
                 if (localData) {
-                    return JSON.parse(localData);
+                    let combined = [...baseDataFallback];
+                    JSON.parse(localData).forEach(localUser => {
+                        combined = combined.filter(u => u.alias.toLowerCase() !== localUser.alias.toLowerCase());
+                        combined.push(localUser);
+                    });
+                    return combined;
                 }
-                return [...simulatedUsers];
+                return baseDataFallback;
             }
         }
 
-        async function guardarResultadoGlobal(aciertos, errores, avgTime, listaFallos) {
-            // Mostrar estado de carga en el UI si se desea, aquí podríamos cambiar el botón
+        async function guardarResultadoGlobal(aciertos, errores, avgTime, listaFallos, longestScenario) {
             document.getElementById('ranking-table').style.opacity = '0.5';
 
-            let ranking = await obtenerRankingGlobal();
+            let rankingArray = await obtenerRankingGlobal();
 
-            // Crear nuevo registro
             const nuevoRegistro = {
                 alias: userAlias || "Anónimo",
                 aciertos: aciertos,
                 errores: errores,
-                avgTime: parseFloat(avgTime),
+                avgTime: parseFloat(avgTime).toFixed(1),
                 timestamp: Date.now(),
-                fallos: listaFallos
+                fallos: listaFallos,
+                longestScenario: longestScenario
             };
 
-            // Remover intento previo del mismo usuario
-            ranking = ranking.filter(entry => entry.alias.toLowerCase() !== nuevoRegistro.alias.toLowerCase());
-            ranking.push(nuevoRegistro);
+            // Filtrar repetidos: Conservar solo el último intento de ese alias
+            rankingArray = rankingArray.filter(entry => entry.alias.toLowerCase() !== nuevoRegistro.alias.toLowerCase());
+            rankingArray.push(nuevoRegistro);
 
+            // Intentar guardarlo globalmente
             try {
-                // Sincronizar con la API Global
-                await fetch(JSONBIN_URL, {
+                const response = await fetch(JSONBIN_URL, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Access-Key': JSONBIN_KEY
                     },
-                    body: JSON.stringify(ranking)
+                    body: JSON.stringify(rankingArray)
                 });
+
+                if (!response.ok) {
+                    throw new Error("API de guardado falló.");
+                }
             } catch (error) {
-                console.error("Fallo guardando en nube, guardando en fallback local.", error);
-                localStorage.setItem('phishingQuizGlobalRankingFallback', JSON.stringify(ranking));
+                console.error("Error al guardar en JSONBin, se actualizará localmente.", error);
+                localStorage.setItem('phishingQuizLocalData', JSON.stringify(rankingArray));
             }
 
             document.getElementById('ranking-table').style.opacity = '1';
-            // Renderizar la tabla con los datos frescos
-            renderizarScoreboard(ranking);
+            renderizarScoreboard(rankingArray);
         }
 
         function visualizarScoreboard() {
             document.getElementById('scoreboard-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        async function renderizarScoreboard(rankingArray) {
+        async function renderizarScoreboard(rankingArrayParam) {
+            let rankingArray = rankingArrayParam;
             if (!rankingArray) {
-                document.getElementById('ranking-body').innerHTML = '<tr><td colspan="5" style="text-align:center;">Cargando Ranking Global...</td></tr>';
+                const tbody = document.getElementById('ranking-body');
+                if(tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Cargando Ranking Global Online...</td></tr>';
                 rankingArray = await obtenerRankingGlobal();
             }
 
@@ -1575,38 +1623,36 @@
             const tbody = document.getElementById('ranking-body');
             tbody.innerHTML = '';
 
-            // Consolidar fallos globales para la analítica
             let fallosGlobalesCounter = {};
 
             rankingArray.forEach((user, idx) => {
-                // Rellenar tabla
                 const row = document.createElement('tr');
 
-                // Badge Position
                 let badgeClass = 'rank-other';
                 if (idx === 0) badgeClass = 'rank-1';
                 else if (idx === 1) badgeClass = 'rank-2';
                 else if (idx === 2) badgeClass = 'rank-3';
 
-                // Resaltar al usuario actual
                 const isCurrentUser = userAlias && (user.alias.toLowerCase() === userAlias.toLowerCase());
                 if (isCurrentUser) {
-                    row.style.backgroundColor = '#eff6ff'; // Fila azul clara
+                    row.style.backgroundColor = '#eff6ff';
                     row.style.fontWeight = 'bold';
                 }
+                
+                let slowScenario = user.longestScenario ? `Escenario ${user.longestScenario}` : 'N/A';
 
                 row.innerHTML = `
                     <td style="text-align: center;">
-                        <span class="rank-badge ${badgeClass}">${idx + 1}</span>
+                        <span class="rank-badge ${badgeClass}" style="display:inline-block; width:24px; height:24px; text-align:center; border-radius:50%; background:${idx<3?'#f59e0b':'#e2e8f0'}; color:${idx<3?'#fff':'#475569'}; line-height:24px; font-weight:bold;">${idx + 1}</span>
                     </td>
                     <td>${user.alias} ${isCurrentUser ? '<span style="font-size:0.75rem; color:#2563eb; margin-left:5px;">(Tú)</span>' : ''}</td>
                     <td style="text-align: center; color: #10b981; font-weight:600;">${user.aciertos}</td>
                     <td style="text-align: center; color: #ef4444;">${user.errores}</td>
                     <td style="text-align: center; color: #64748b;">${user.avgTime}s</td>
+                    <td style="text-align: center; color: #64748b;">${slowScenario}</td>
                 `;
                 tbody.appendChild(row);
 
-                // Contar fallos
                 if (user.fallos && Array.isArray(user.fallos)) {
                     user.fallos.forEach(fId => {
                         fallosGlobalesCounter[fId] = (fallosGlobalesCounter[fId] || 0) + 1;
@@ -1614,9 +1660,6 @@
                 }
             });
 
-            // Actualizar Métricas "Análisis Estadístico Básico"
-
-            // 1. Escenario Más Fallado
             let maxCount = -1;
             let hardestId = -1;
             for (const [sId, count] of Object.entries(fallosGlobalesCounter)) {
@@ -1627,18 +1670,20 @@
             }
 
             const txtHardest = document.getElementById('stat-hardest-scenario');
-            if (hardestId >= 0 && maxCount > 0 && typeof escenarios !== 'undefined' && escenarios[hardestId]) {
-                txtHardest.innerText = `Escenario ${hardestId + 1}`;
-            } else {
-                txtHardest.innerText = "-";
+            if (txtHardest) {
+                if (hardestId >= 0 && maxCount > 0 && typeof escenarios !== 'undefined') {
+                    txtHardest.innerText = `Escenario ${hardestId}`;
+                } else {
+                    txtHardest.innerText = "N/A";
+                }
             }
 
-            // 2. Precisión Promedio Global
-            const totalIntentosDeUsuarios = rankingArray.length * 10; // 10 escenarios cada uno
+            const totalIntentosDeUsuarios = rankingArray.length * 10;
             const totalAciertosComunales = rankingArray.reduce((acc, user) => acc + user.aciertos, 0);
             const globalAvgPercentage = totalIntentosDeUsuarios > 0 ? Math.round((totalAciertosComunales / totalIntentosDeUsuarios) * 100) : 0;
 
-            document.getElementById('stat-global-average').innerText = `${globalAvgPercentage}%`;
+            const txtAvg = document.getElementById('stat-global-average');
+            if (txtAvg) txtAvg.innerText = `${globalAvgPercentage}%`;
         }
 
         // Renderizar tabla vacía / semilla al inicio por primera vez
