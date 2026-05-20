@@ -349,6 +349,24 @@
             color: white;
         }
 
+        .cert-preview-container {
+            width: 100%;
+            aspect-ratio: 1.414 / 1;
+            height: auto;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+            background-color: #f1f5f9;
+        }
+
+        .cert-preview-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         .placeholder-box {
             background: #fffbeb;
             border: 1px solid #fef3c7;
@@ -457,13 +475,15 @@
                     <!-- PDF Evidence Card -->
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Introduction_to_Cybersecurity_certificate_177573-upslp-edu-mx_e0b1e8ab-b690-4a2d-96b4-6cc2da457955.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Introduction_to_Cybersecurity_certificate_177573-upslp-edu-mx_e0b1e8ab-b690-4a2d-96b4-6cc2da457955.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Introduction_to_Cybersecurity_certificate_177573-upslp-edu-mx_e0b1e8ab-b690-4a2d-96b4-6cc2da457955.pdf" download="Certificado_Introduccion_Ciberseguridad.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -482,14 +502,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Introduction to Cybersecurity')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/1754956e-900c-4d1f-907b-cbc30650b8e7" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
@@ -517,13 +537,15 @@
                 <div class="cert-evidence">
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Networking_Basics_certificate_177573-upslp-edu-mx_3f652c31-aac9-444c-a1f1-eb07eca505ff.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Networking_Basics_certificate_177573-upslp-edu-mx_3f652c31-aac9-444c-a1f1-eb07eca505ff.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Networking_Basics_certificate_177573-upslp-edu-mx_3f652c31-aac9-444c-a1f1-eb07eca505ff.pdf" download="Certificado_Networking_Basics.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -541,14 +563,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Networking Basics')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/f15a520d-f7e6-49ec-9e3d-bf575f7b2e76" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
@@ -576,13 +598,15 @@
                 <div class="cert-evidence">
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Networking_Devices_and_Initial_Configuration_certificate_177573-upslp-edu-mx_33e5e94f-78f1-426d-9297-c13e39946161.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Networking_Devices_and_Initial_Configuration_certificate_177573-upslp-edu-mx_33e5e94f-78f1-426d-9297-c13e39946161.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Networking_Devices_and_Initial_Configuration_certificate_177573-upslp-edu-mx_33e5e94f-78f1-426d-9297-c13e39946161.pdf" download="Certificado_Networking_Devices.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -600,14 +624,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Networking Devices and Initial Configuration')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/355110ce-6cd6-434d-b625-782bf2e3e69b" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
@@ -635,13 +659,15 @@
                 <div class="cert-evidence">
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Endpoint_Security_certificate_177573-upslp-edu-mx_aac40739-6a6d-406d-bc3b-6ef1dd41c48b.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Endpoint_Security_certificate_177573-upslp-edu-mx_aac40739-6a6d-406d-bc3b-6ef1dd41c48b.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Endpoint_Security_certificate_177573-upslp-edu-mx_aac40739-6a6d-406d-bc3b-6ef1dd41c48b.pdf" download="Certificado_Endpoint_Security.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -659,14 +685,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Endpoint Security')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/336c39ba-4f99-4288-8389-e4c18f31f2d3" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
@@ -694,13 +720,15 @@
                 <div class="cert-evidence">
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Cyber_Threat_Management_certificate_177573-upslp-edu-mx_1b90b457-dd23-481a-a3d3-2926d2407aee.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Cyber_Threat_Management_certificate_177573-upslp-edu-mx_1b90b457-dd23-481a-a3d3-2926d2407aee.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Cyber_Threat_Management_certificate_177573-upslp-edu-mx_1b90b457-dd23-481a-a3d3-2926d2407aee.pdf" download="Certificado_Gestion_Amenazas.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -718,14 +746,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Cyberthreat Management')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/e9a3a707-34b9-4b6b-ae9f-e578498744bd" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
@@ -753,13 +781,15 @@
                 <div class="cert-evidence">
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Junior_Cybersecurity_Analyst_Career_Path_certificate_177573-upslp-edu-mx_1e99861f-4755-48d7-aa2e-48d4ebdbb5f1.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Junior_Cybersecurity_Analyst_Career_Path_certificate_177573-upslp-edu-mx_1e99861f-4755-48d7-aa2e-48d4ebdbb5f1.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Junior_Cybersecurity_Analyst_Career_Path_certificate_177573-upslp-edu-mx_1e99861f-4755-48d7-aa2e-48d4ebdbb5f1.pdf" download="Certificado_Junior_Cybersecurity_Analyst.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -777,14 +807,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Junior Cybersecurity Analyst')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/ec13ad32-7387-4da3-bd63-3da19f2b527c" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
@@ -812,13 +842,15 @@
                 <div class="cert-evidence">
                     <div class="evidence-card">
                         <h4>Evidencia del Certificado</h4>
-                        <div class="evidence-icon-box">
-                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
-                            </svg>
+                        <div class="cert-preview-container">
+                            <iframe src="Ethical_Hacker_certificate_177573-upslp-edu-mx_ce7808e6-307e-4973-8ebf-b526f94fe3b4.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
                         </div>
-                        <a href="Ethical_Hacker_certificate_177573-upslp-edu-mx_ce7808e6-307e-4973-8ebf-b526f94fe3b4.pdf" target="_blank" class="btn-action btn-pdf">
-                            Ver Certificado (PDF)
+                        <a href="Ethical_Hacker_certificate_177573-upslp-edu-mx_ce7808e6-307e-4973-8ebf-b526f94fe3b4.pdf" download="Certificado_Ethical_Hacker.pdf" class="btn-action btn-pdf">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            Descargar Certificado (PDF)
                         </a>
                         <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
@@ -836,14 +868,14 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             </svg>
                         </div>
-                        <a href="javascript:void(0);" onclick="alertBadge('Ethical Hacker')" class="btn-action btn-badge">
-                            Verificar Credencial
+                        <a href="https://www.credly.com/badges/23e0f65f-ac26-4d2d-b756-5596e0a27e02" target="_blank" rel="noopener noreferrer" class="btn-action btn-badge">
+                            Verificar Credencial (Credly)
                         </a>
-                        <div class="placeholder-box">
+                        <div class="placeholder-box" style="background: #e6f4ea; border-color: #34a853; border-left: 4px solid #34a853; color: #137333;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
-                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                            <span><strong>Insignia vinculada:</strong> Enlace oficial de Credly integrado.</span>
                         </div>
                     </div>
                 </div>
