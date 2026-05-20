@@ -2,9 +2,894 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Certificados</title>
+    <title>Certificados - Portafolio de Seguridad Informática</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../estilo/actividades.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #2563eb;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Objectives Section */
+        .objectives-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .objectives-card h3 {
+            font-family: 'Outfit', sans-serif;
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .objective-item {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        .objective-item p {
+            margin: 0;
+            text-align: justify;
+        }
+
+        .objective-item ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .objective-item li {
+            margin-bottom: 8px;
+        }
+
+        /* Tab Navigation sticky bar */
+        .tabs-wrapper {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+            padding: 15px 0;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 35px;
+        }
+
+        .tab-bar {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+        }
+
+        .tab-bar::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .tab-bar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+
+        .tab-bar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .tab-btn {
+            flex: 0 0 auto;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .tab-btn.active {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        /* Tab Content and Layout */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.4s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        /* Detail Elements styling */
+        .cert-info h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-left: 5px solid #2563eb;
+            padding-left: 12px;
+        }
+
+        .cert-badges-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cert-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .cert-badge-pill.status {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .cert-meta-item {
+            display: inline-flex;
+            align-items: center;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .cert-meta-item strong {
+            color: #1e293b;
+            margin-right: 5px;
+        }
+
+        .cert-review-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            color: #0f172a;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .cert-review {
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: #334155;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        /* Evidence Cards */
+        .evidence-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .evidence-card:hover {
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        .evidence-card h4 {
+            font-family: 'Outfit', sans-serif;
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #0f172a;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .evidence-icon-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .evidence-icon-box.badge-box {
+            background: #fffbeb;
+            color: #f59e0b;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .btn-pdf {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-pdf:hover {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        .btn-badge {
+            background-color: #0f172a;
+            color: white;
+        }
+
+        .btn-badge:hover {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        .placeholder-box {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid #f59e0b;
+            color: #b45309;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            text-align: left;
+            margin-top: 12px;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0f172a;
+            color: #94a3b8;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <header>
+        <h1>Portafolio de Certificaciones</h1>
+        <p>Proceso de Formación Continua en Ciberseguridad &bull; Cisco Networking Academy</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- General and Specific Objectives Card -->
+        <div class="objectives-card">
+            <div class="objectives-grid">
+                <div class="objective-item">
+                    <h3>
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+                            <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        </svg>
+                        Objetivo General
+                    </h3>
+                    <p>Desarrollar la capacidad de reflexión crítica del estudiante sobre su proceso de certificación en ciberseguridad, integrando evidencia formal y narrativa profesional dentro de su portafolio digital, analizando la aplicabilidad real del conocimiento en su entorno.</p>
+                </div>
+                <div class="objective-item" style="border-left: 1px solid #e2e8f0; padding-left: 24px;">
+                    <h3>
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5-.5V3.707L8.354 4.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L10.5 3.707V7.5a.5.5 0 0 1-.5.5zm-7 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM5 8a.5.5 0 0 1-.5-.5V3.707L3.354 4.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L5.5 3.707V7.5a.5.5 0 0 1-.5.5z"/>
+                        </svg>
+                        Objetivos Específicos
+                    </h3>
+                    <ul>
+                        <li>Analizar el impacto personal, académico y profesional de haber cursado una certificación en ciberseguridad enfocado en Ingeniería en Tecnologías de la Información (ITI) de la UPSLP.</li>
+                        <li>Documentar de forma estructurada y profesional las certificaciones obtenidas en la academia NetAcad.</li>
+                        <li>Integrar evidencia verificable (certificados en PDF y badges digitales) como respaldo tangible del aprendizaje técnico adquirido.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STICKY TAB SELECTOR -->
+        <div class="tabs-wrapper">
+            <div class="tab-bar" id="tabBar">
+                <button class="tab-btn active" onclick="switchTab(0)">1. Ciberseguridad Intro</button>
+                <button class="tab-btn" onclick="switchTab(1)">2. Redes Básicas</button>
+                <button class="tab-btn" onclick="switchTab(2)">3. Dispositivos & Config</button>
+                <button class="tab-btn" onclick="switchTab(3)">4. Seguridad Terminales</button>
+                <button class="tab-btn" onclick="switchTab(4)">5. Amenazas Cyber</button>
+                <button class="tab-btn" onclick="switchTab(5)">6. Analista Junior</button>
+                <button class="tab-btn" onclick="switchTab(6)">7. Hacker Ético</button>
+            </div>
+        </div>
+
+        <!-- CERTIFICATION PAGES (TAB CONTENTS) -->
+
+        <!-- 1. Introducción a la ciberseguridad -->
+        <div class="tab-content active" id="content-0">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Introducción a la Ciberseguridad</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        El curso <em>Introducción a la Ciberseguridad</em> de Cisco Networking Academy proporciona un panorama integral sobre el ecosistema de la seguridad digital. Abarca temas esenciales como la tríada de la información (Confidencialidad, Integridad y Disponibilidad), los tipos de malware, ataques de ingeniería social y las mejores prácticas para la protección de datos personales y corporativos. Para un estudiante de Ingeniería en Tecnologías de la Información (ITI) en la Universidad Politécnica de San Luis Potosí (UPSLP), este curso representa el primer peldaño fundamental. La currícula de ITI en la UPSLP promueve el desarrollo integral de sistemas y la administración de redes, áreas donde la seguridad no puede ser un añadido secundario, sino un principio de diseño. Esta certificación ayuda a concientizar sobre el impacto financiero y reputacional de las brechas de seguridad, permitiendo que como futuros ingenieros desarrollemos soluciones de software e infraestructura considerando la protección de activos desde el primer día. Además, en el entorno industrial y corporativo de la región potosina, la capacidad de identificar vectores de ataque iniciales y aplicar controles básicos de seguridad informática es una competencia altamente valorada que complementa el perfil de egreso en tecnologías críticas de información.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <!-- PDF Evidence Card -->
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_intro_ciberseguridad.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span><strong>Evidencia pendiente:</strong> Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_intro_ciberseguridad.pdf</code> dentro de la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <!-- Digital Badge Card -->
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Introduction to Cybersecurity')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Conceptos básicos de redes -->
+        <div class="tab-content" id="content-1">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Conceptos Básicos de Redes</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco CCST Track</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        La certificación de <em>Conceptos Básicos de Redes</em> (Networking Basics) de NetAcad introduce los principios arquitectónicos de la comunicación de datos. Se profundiza en el modelo de referencia OSI y el modelo TCP/IP, direccionamiento IPv4 y IPv6, subredes, protocolos de transporte y la operación básica de la conmutación y el enrutamiento. Para la carrera de Ingeniería en Tecnologías de la Información (ITI) en la UPSLP, esta materia es el núcleo sobre el cual se edifican todas las competencias de conectividad. Entender cómo viaja un paquete de datos, la estructura de las tramas y la importancia del direccionamiento IP es crucial para materias avanzadas de redes en la universidad y para el diseño de infraestructuras corporativas. La formación de Cisco dota a los estudiantes de ITI de un vocabulario técnico estándar y habilidades analíticas para el diagnóstico y resolución de problemas de conectividad en entornos empresariales. En el campo profesional local, donde las empresas globales dependen de sistemas distribuidos y servicios en la nube, dominar las bases de redes de datos garantiza que el ingeniero en ITI pueda desplegar y optimizar plataformas de TI con una alta eficiencia y una topología de red sólida.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_conceptos_redes.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_conceptos_redes.pdf</code> en la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Networking Basics')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Dispositivos de red y configuración inicial -->
+        <div class="tab-content" id="content-2">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Dispositivos de Red y Configuración Inicial</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco Packet Tracer Lab</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        Este curso práctico de Cisco se enfoca en el hardware de red y en la interacción directa con el sistema operativo Cisco IOS. Los temas clave incluyen la configuración inicial de routers y switches, implementación de seguridad en accesos (contraseñas, SSH), asignación de direcciones IP en interfaces y la verificación de conectividad mediante comandos de diagnóstico como ping y traceroute. En el contexto de Ingeniería en Tecnologías de la Información (ITI) en la UPSLP, esta certificación traslada la teoría de redes al plano real y tangible. A través del uso de simuladores avanzados como Cisco Packet Tracer y laboratorios físicos, los estudiantes aprenden a interactuar con la consola de comandos de equipos industriales. Esta destreza técnica es vital para el perfil de ITI, ya que capacita al estudiante para la administración física y lógica de la infraestructura de telecomunicaciones de una empresa. Al egresar, contar con la habilidad para configurar y asegurar dispositivos de red bajo estándares internacionales de Cisco proporciona una gran ventaja competitiva, permitiendo integrarse de inmediato en equipos de soporte de red, operaciones de TI o centros de datos de la creciente industria manufacturera y de servicios en San Luis Potosí.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_dispositivos_configuracion.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_dispositivos_configuracion.pdf</code> en la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Networking Devices and Initial Configuration')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Seguridad en terminales -->
+        <div class="tab-content" id="content-3">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Seguridad en Terminales (Endpoint Security)</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco Endpoint Track</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        La certificación <em>Seguridad en Terminales</em> aborda las técnicas para proteger dispositivos finales como computadoras de escritorio, portátiles, servidores y dispositivos móviles dentro de una red empresarial. El contenido cubre la instalación y gestión de antivirus, cortafuegos de host, sistemas de detección de intrusos (HIDS), cifrado de disco y gestión de parches. Para un estudiante de Ingeniería en Tecnologías de la Información (ITI) en la UPSLP, este curso es indispensable en el área de seguridad de sistemas operativos. Frecuentemente, los puntos finales son el principal vector de entrada para ataques complejos (como el ransomware) en las organizaciones. Esta certificación enseña a los estudiantes de ITI a aplicar principios de menor privilegio y endurecimiento (hardening) de sistemas. Esto es directamente aplicable en la administración de servidores Windows y Linux, asignaturas clave de la carrera. En el ejercicio profesional, un ingeniero de la UPSLP con conocimientos de Endpoint Security estará preparado para diseñar políticas de seguridad robustas, gestionar el inventario de software corporativo y mitigar vulnerabilidades locales, reduciendo drásticamente la superficie de ataque y garantizando la continuidad operativa de los negocios.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_seguridad_terminales.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_seguridad_terminales.pdf</code> en la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Endpoint Security')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Administración de amenazas cibernéticas -->
+        <div class="tab-content" id="content-4">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Administración de Amenazas Cibernéticas</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco Threat Track</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        El curso <em>Administración de Amenazas Cibernéticas</em> de Cisco se adentra en la gestión estratégica e incidentes de seguridad. Los temas principales cubren la clasificación de amenazas, monitorización activa de tráfico de red, análisis de registros de eventos (logs), uso de herramientas SIEM y el desarrollo de planes de respuesta ante incidentes. En la carrera de Ingeniería en Tecnologías de la Información (ITI) de la UPSLP, esta certificación conecta los aspectos técnicos con los procesos de gobernanza y gestión de riesgos. Un ingeniero en ITI no solo instala sistemas, sino que también debe vigilar y defender la infraestructura organizacional. Este curso entrena al estudiante en el análisis forense básico y en la toma de decisiones rápidas para contener brechas de seguridad, complementando materias de auditoría de sistemas e ingeniería de software seguro. A nivel laboral, esta formación es de alta relevancia dado que las organizaciones medianas y grandes en San Luis Potosí están implementando centros de operaciones de seguridad (SOC) internos o subcontratados. Contar con esta base capacita al egresado para desempeñarse como analista de seguridad de primer nivel, ayudando a proteger la propiedad intelectual y los datos financieros corporativos.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_amenazas_ciberneticas.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_amenazas_ciberneticas.pdf</code> en la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Cyberthreat Management')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Carrera Profesional de Analista Junior en Ciberseguridad -->
+        <div class="tab-content" id="content-5">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Carrera Profesional de Analista Junior en Ciberseguridad</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco CCST Cybersecurity Pathway</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        Esta ruta formativa integral sintetiza múltiples dominios de ciberseguridad para preparar al estudiante en el rol específico de analista en un Centro de Operaciones de Seguridad (SOC). Abarca conceptos de defensa de red, análisis de vulnerabilidades, criptografía, seguridad en la nube y el uso de herramientas líderes en la industria como Wireshark y sistemas operativos especializados. Para la carrera de Ingeniería en Tecnologías de la Información (ITI) en la UPSLP, esta certificación representa la consolidación y culminación del perfil especializado en seguridad informática. Integra de manera coherente los conocimientos de programación, redes y sistemas operativos que los estudiantes adquieren a lo largo de su trayectoria académica. Al cursar esta ruta, el estudiante de la UPSLP obtiene una perspectiva holística que vincula el desarrollo de software y la infraestructura con las operaciones defensivas del día a día. En el mercado laboral moderno, esta certificación oficial de Cisco NetAcad valida habilidades muy solicitadas por empresas multinacionales, consultoras de TI e instituciones bancarias, abriendo las puertas a puestos bien remunerados enfocados en el monitoreo de amenazas, análisis forense y resiliencia digital desde el primer día de egreso.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_analista_junior.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_analista_junior.pdf</code> en la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Junior Cybersecurity Analyst')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Hacker ético -->
+        <div class="tab-content" id="content-6">
+            <div class="cert-grid">
+                <div class="cert-info">
+                    <h2>Hacker Ético</h2>
+                    <div class="cert-badges-row">
+                        <span class="cert-badge-pill">Cisco NetAcad</span>
+                        <span class="cert-badge-pill status">Completado</span>
+                        <span class="cert-meta-item"><strong>Plataforma:</strong> NetAcad</span>
+                        <span class="cert-meta-item"><strong>Credencial:</strong> Cisco Offensive Track</span>
+                    </div>
+                    
+                    <div class="cert-review-title">Reseña del Curso e Impacto en ITI (UPSLP)</div>
+                    <div class="cert-review">
+                        El curso de <em>Hacker Ético</em> se enfoca en la ciberseguridad ofensiva y las metodologías de pruebas de penetración (pentesting). Se estudian fases críticas como el reconocimiento de red, escaneo de puertos y vulnerabilidades, explotación de fallos (incluyendo inyecciones SQL y cross-site scripting), escalada de privilegios y la redacción de informes técnicos de auditoría. Para un estudiante de Ingeniería en Tecnologías de la Información (ITI) de la UPSLP, esta certificación proporciona la contraparte fundamental para la defensa: la mentalidad ofensiva. Para proteger adecuadamente un sistema, el ingeniero de la UPSLP debe comprender cómo piensa y opera un atacante. Este curso aporta una comprensión profunda sobre las debilidades comunes en el código de software y la configuración de servidores, conectando directamente con las asignaturas de programación web y base de datos de la carrera. En la práctica profesional, el hacking ético capacita al graduado en ITI para realizar auditorías internas y evaluaciones de seguridad en empresas locales, asegurando que las aplicaciones antes de ser publicadas en producción cumplan con los más altos estándares de seguridad y estén blindadas contra intrusiones no autorizadas.
+                    </div>
+                </div>
+                
+                <div class="cert-evidence">
+                    <div class="evidence-card">
+                        <h4>Evidencia del Certificado</h4>
+                        <div class="evidence-icon-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 1.5 13 5h-3.5V1.5zM4.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5-2.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertPDF('certificado_hacker_etico.pdf')" class="btn-action btn-pdf">
+                            Ver Certificado (PDF)
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Para vincular tu certificado real, guarda el archivo PDF como <code>certificado_hacker_etico.pdf</code> en la carpeta <code>html/Certificados/pdf/</code>.</span>
+                        </div>
+                    </div>
+
+                    <div class="evidence-card">
+                        <h4>Insignia Digital</h4>
+                        <div class="evidence-icon-box badge-box">
+                            <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 11.286l-3.5 2.164 1.05-3.99-3.05-2.65 4.1-.35L8 2.5l1.4 3.96 4.1.35-3.05 2.65 1.05 3.99L8 11.286zm0-1.03l2.365 1.46-.71-2.7 2.062-1.79-2.77-.236L8 4.417 6.953 7.37l-2.77.236 2.062 1.79-.71 2.7L8 10.256z"/>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            </svg>
+                        </div>
+                        <a href="javascript:void(0);" onclick="alertBadge('Ethical Hacker')" class="btn-action btn-badge">
+                            Verificar Credencial
+                        </a>
+                        <div class="placeholder-box">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                            <span>Enlace de Credly vinculable posteriormente. Haz clic en el botón para simular la verificación.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>Portafolio Digital de Ciberseguridad</strong> &bull; UPSLP</p>
+        <p>Ingeniería en Tecnologías de la Información (ITI)</p>
+        <p>&copy; 2026 - Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Tab Switching Script -->
+    <script>
+        function switchTab(index) {
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Remove active class from all contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to selected button and content
+            buttons[index].classList.add('active');
+            contents[index].classList.add('active');
+
+            // Scroll active tab into view in the sticky bar
+            const activeBtn = buttons[index];
+            const tabBar = document.getElementById('tabBar');
+            const leftOffset = activeBtn.offsetLeft - (tabBar.clientWidth / 2) + (activeBtn.clientWidth / 2);
+            tabBar.scrollTo({
+                left: leftOffset,
+                behavior: 'smooth'
+            });
+        }
+
+        function alertPDF(filename) {
+            alert("📄 Documento PDF Solicitado: \"" + filename + "\"\n\nInstrucción de Enlace:\n1. Coloca tu archivo PDF de certificación en la carpeta: 'html/Certificados/pdf/" + filename + "'\n2. Cuando lo hagas, este botón abrirá directamente tu certificado de NetAcad.");
+        }
+
+        function alertBadge(coursename) {
+            alert("🌟 Badge Digital de NetAcad: \"" + coursename + "\"\n\nInstrucción de Enlace:\nEste botón te redirigirá a tu insignia oficial de Credly / Cisco. Puedes actualizar el enlace 'href' en el código HTML una vez que tengas tu link de verificación personalizado.");
+        }
+    </script>
 </body>
 </html>
