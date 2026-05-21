@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 17 - Evaluación CVSS v3.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../estilo/actividades.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #2563eb;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        .cert-info h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-left: 5px solid #2563eb;
+            padding-left: 12px;
+        }
+
+        .cert-badges-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cert-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .cert-badge-pill.status {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .cert-meta-item {
+            display: inline-flex;
+            align-items: center;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .cert-meta-item strong {
+            color: #1e293b;
+            margin-right: 5px;
+        }
+
+        .cert-description-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            font-size: 0.96rem;
+            line-height: 1.6;
+            color: #334155;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            text-align: justify;
+        }
+
+        .cert-description-box strong {
+            color: #0f172a;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 6px;
+        }
+
+        .text-content {
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: #334155;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .text-content ul {
+            padding-left: 20px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .text-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Evidence Cards */
+        .evidence-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .evidence-card:hover {
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        .evidence-card h4 {
+            font-family: 'Outfit', sans-serif;
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #0f172a;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .cert-preview-container {
+            width: 100%;
+            aspect-ratio: 1.414 / 1;
+            height: auto;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+            background-color: #f1f5f9;
+        }
+
+        .cert-preview-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .btn-pdf {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-pdf:hover {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        .placeholder-box {
+            background: #e6f4ea;
+            border: 1px solid #d1e7dd;
+            border-left: 4px solid #34a853;
+            color: #137333;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            text-align: left;
+            margin-top: 12px;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Interactive Visual Severity Scale */
+        .severity-scale {
+            width: 100%;
+            margin-top: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            box-sizing: border-box;
+        }
+
+        .scale-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .scale-critical { background: #fee2e2; color: #991b1b; border-left: 4px solid #ef4444; }
+        .scale-high { background: #ffedd5; color: #9a3412; border-left: 4px solid #f97316; }
+        .scale-medium { background: #fef9c3; color: #854d0e; border-left: 4px solid #eab308; }
+        .scale-low { background: #dcfce7; color: #166534; border-left: 4px solid #22c55e; }
+        .scale-none { background: #f1f5f9; color: #475569; border-left: 4px solid #94a3b8; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0f172a;
+            color: #94a3b8;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Actividad 17 - Evaluación CVSS v3.1</h1>
+        <p>Análisis Cualitativo y Cuantitativo de Vulnerabilidades bajo Estándar FIRST</p>
+    </header>
+
+    <div class="container">
+
+        <div class="cert-grid">
+            
+            <div class="cert-info">
+                <h2>Cálculo de Severidad y Métricas de Vulnerabilidad</h2>
+                <div class="cert-badges-row">
+                    <span class="cert-badge-pill">FIRST.org</span>
+                    <span class="cert-badge-pill status">Evaluado</span>
+                    <span class="cert-meta-item"><strong>Materia:</strong> Seguridad Informática</span>
+                    <span class="cert-meta-item"><strong>Unidad:</strong> 3</span>
+                </div>
+
+                <div class="cert-description-box">
+                    <strong>Descripción de la actividad:</strong> Esta práctica se centra en la aplicación práctica del <strong>Common Vulnerability Scoring System (CVSS v3.1)</strong> para evaluar cuantitativamente la severidad de diversas vulnerabilidades informáticas. Se analizan sus métricas base (Exploitability e Impact), así como el rol crítico de la métrica <em>Scope</em> para determinar la propagación de riesgos en la red.
+                </div>
+
+                <div class="section-title">1. Fundamentos de CVSS v3.1</div>
+                <div class="text-content">
+                    El **Common Vulnerability Scoring System (CVSS)** es un estándar abierto de la industria, mantenido por el FIRST (Forum of Incident Response and Security Teams), diseñado para evaluar de forma homogénea y neutral la severidad de las vulnerabilidades en sistemas de software y hardware.
+                    <br><br>
+                    Proporciona una puntuación numérica (de **0.0 a 10.0**) que se traduce en calificaciones cualitativas (Nulo, Bajo, Medio, Alto y Crítico). Esta puntuación permite a los equipos de seguridad priorizar sus esfuerzos de remediación y mitigación basándose en el riesgo real que representa la vulnerabilidad para su entorno operativo.
+                </div>
+
+                <div class="section-title">2. Métricas del Grupo Base (Base Metric Group)</div>
+                <div class="text-content">
+                    El cálculo principal de CVSS v3.1 se basa en las métricas permanentes denominadas **Métricas Base**, las cuales se dividen en dos subgrupos esenciales:
+                    <ul>
+                        <li><strong>Exploitability (Explotabilidad):</strong> Mide la dificultad técnica y las condiciones requeridas para explotar exitosamente la vulnerabilidad. Incluye:
+                            <ul>
+                                <li>*Attack Vector (AV)*: Red, Adyacente, Local o Físico.</li>
+                                <li>*Attack Complexity (AC)*: Baja o Alta.</li>
+                                <li>*Privileges Required (PR)*: Ninguno, Bajos o Altos.</li>
+                                <li>*User Interaction (UI)*: Ninguna o Requerida.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Impact (Impacto):</strong> Representa las consecuencias directas de una explotación exitosa sobre el activo informático, evaluando la clásica tríada CIA:
+                            <ul>
+                                <li>*Confidentiality Impact (C)*: Alto, Bajo o Ninguno.</li>
+                                <li>*Integrity Impact (I)*: Alto, Bajo o Ninguno.</li>
+                                <li>*Availability Impact (A)*: Alto, Bajo o Ninguno.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="section-title">3. La Métrica Scope (Alcance): Un Factor Clave</div>
+                <div class="text-content">
+                    Uno de los conceptos más innovadores de la versión 3.1 es la métrica **Scope (S)**. Esta determina si una vulnerabilidad presente en un componente de software (la autoridad de seguridad de origen) puede afectar recursos administrados por una autoridad de seguridad diferente (el componente de destino).
+                    <br><br>
+                    *   **Scope Unchanged (U - Sin Cambios):** El componente explotado y el componente afectado son el mismo, o pertenecen a la misma autoridad de seguridad.
+                    *   **Scope Changed (C - Cambiado):** La explotación exitosa permite al atacante impactar recursos fuera de la autoridad original del sistema vulnerable (por ejemplo, escapar de una máquina virtual al hipervisor host, o realizar ataques de Cross-Site Scripting que afectan al navegador del usuario final). Un cambio de alcance eleva drásticamente la puntuación final de impacto.
+                </div>
+
+                <div class="section-title">4. Reflexión e Impacto Profesional en ITI (UPSLP)</div>
+                <div class="text-content">
+                    Para un estudiante de **Ingeniería en Tecnologías de la Información (ITI)** en la Universidad Politécnica de San Luis Potosí, dominar CVSS v3.1 representa una competencia sumamente relevante en el ámbito laboral.
+                    <br><br>
+                    Durante el ciclo de desarrollo y la administración de infraestructuras, nos enfrentamos constantemente a reportes de escaneo de vulnerabilidades. Comprender cómo se calcula un vector de ataque nos capacita para tomar decisiones de negocio críticas: en lugar de alarmarnos por cualquier alerta, podemos realizar un análisis cualitativo y determinar que una vulnerabilidad catalogada de severidad "Alta" puede tener un impacto real "Bajo" en nuestro entorno de red cerrado (debido a que el Vector de Ataque requiere acceso Físico). Esto permite optimizar los tiempos de respuesta y aplicar mecanismos de hardening eficientes, alineando la seguridad digital con las prioridades operativas de la industria regional.
+                </div>
+            </div>
+
+            <div class="cert-evidence">
+                
+                <!-- PDF Evidence Card -->
+                <div class="evidence-card">
+                    <h4>Reporte Técnico Formal</h4>
+                    <div class="cert-preview-container">
+                        <iframe src="act17-Equipo2.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
+                    </div>
+                    <a href="act17-Equipo2.pdf" download="Act17_Evaluacion_CVSS_Equipo2.pdf" class="btn-action btn-pdf">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Descargar Reporte (PDF)
+                    </a>
+                    
+                    <div class="placeholder-box">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        <span><strong>Documento Verificado:</strong> Evidencia de evaluación CVSS y firma de equipo cargada correctamente.</span>
+                    </div>
+                </div>
+
+                <!-- Visual CVSS Guide Card -->
+                <div class="evidence-card">
+                    <h4>Escala Cualitativa CVSS v3.1</h4>
+                    <div class="severity-scale">
+                        <div class="scale-item scale-critical">
+                            <span>Crítico (Critical)</span>
+                            <span>9.0 - 10.0</span>
+                        </div>
+                        <div class="scale-item scale-high">
+                            <span>Alto (High)</span>
+                            <span>7.0 - 8.9</span>
+                        </div>
+                        <div class="scale-item scale-medium">
+                            <span>Medio (Medium)</span>
+                            <span>4.0 - 6.9</span>
+                        </div>
+                        <div class="scale-item scale-low">
+                            <span>Bajo (Low)</span>
+                            <span>0.1 - 3.9</span>
+                        </div>
+                        <div class="scale-item scale-none">
+                            <span>Nulo (None)</span>
+                            <span>0.0</span>
+                        </div>
+                    </div>
+                    <div class="placeholder-box" style="background: #eff6ff; border-color: #bfdbfe; border-left: 4px solid #2563eb; color: #1e3a8a;">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink: 0; margin-top: 2px;">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                        <span>El cálculo base asigna pesos específicos a cada métrica, donde el cambio de alcance incrementa sustancialmente el multiplicador de impacto.</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Universidad Politécnica de San Luis Potosí | Ingeniería en Tecnologías de la Información</p>
+        <p>Seguridad Informática &copy; 2026</p>
+    </footer>
+
+</body>
+
+</html>

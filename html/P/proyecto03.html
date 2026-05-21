@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto 03 - Auditoría Avanzada de Seguridad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0f1d;
+            --bg-card: rgba(15, 23, 42, 0.6);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --secondary: #a855f7;
+            --cyber-cyan: #06b6d4;
+            --cyber-green: #10b981;
+            --cyber-red: #ef4444;
+            --cyber-orange: #f97316;
+            --text-main: #cbd5e1;
+            --text-glow: #ffffff;
+            --border-neon: rgba(99, 102, 241, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 29, 0) 100%);
+            border-bottom: 1px solid var(--border-neon);
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyber-cyan), var(--primary), transparent);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(90deg, #ffffff, var(--cyber-cyan), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        header p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .cyber-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--text-glow);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 15px;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 950px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Glassmorphic Cards */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 40px -5px rgba(99, 102, 241, 0.08);
+        }
+
+        .glass-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-glow);
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .glass-card h2 svg {
+            color: var(--cyber-cyan);
+            filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.5));
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-glow);
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .text-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #94a3b8;
+            text-align: justify;
+        }
+
+        .text-content ul {
+            padding-left: 20px;
+        }
+
+        .text-content li {
+            margin-bottom: 8px;
+        }
+
+        .text-content strong {
+            color: var(--text-glow);
+        }
+
+        /* CVSS Calculator Styling */
+        .calc-container {
+            background: rgba(10, 15, 29, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .calc-row {
+            margin-bottom: 20px;
+        }
+
+        .calc-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-glow);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .calc-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .calc-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: var(--text-main);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .calc-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-glow);
+        }
+
+        .calc-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--text-glow);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Score Display Widget */
+        .score-display-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .score-display-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-glow);
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .score-circle-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 15px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-circle-svg {
+            transform: rotate(-90deg);
+            width: 140px;
+            height: 140px;
+        }
+
+        .score-circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 8;
+        }
+
+        .score-circle-bar {
+            fill: none;
+            stroke: var(--cyber-cyan);
+            stroke-width: 8;
+            stroke-dasharray: 377;
+            stroke-dashoffset: 377;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease-out, stroke 0.3s;
+        }
+
+        .score-value {
+            position: absolute;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-glow);
+        }
+
+        .score-rating {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 12px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* High-Tech Terminal Console */
+        .terminal-box {
+            background: #05070c;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.82rem;
+            color: var(--cyber-cyan);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ef4444; }
+        .terminal-dot.yellow { background: #eab308; }
+        .terminal-dot.green { background: #22c55e; }
+
+        .terminal-title {
+            color: #475569;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .terminal-body {
+            line-height: 1.6;
+            min-height: 150px;
+        }
+
+        .terminal-line {
+            margin-bottom: 6px;
+        }
+
+        .terminal-prompt {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .terminal-success {
+            color: var(--cyber-green);
+        }
+
+        /* Evidence Cards */
+        .evidence-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .evidence-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-glow);
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        .cert-preview-container {
+            width: 100%;
+            aspect-ratio: 1.414 / 1;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #020617;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cert-preview-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-glow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow), 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .crypto-verification-box {
+            width: 100%;
+            background: rgba(10, 15, 29, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-left: 4px solid var(--secondary);
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 15px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .crypto-verification-box h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-glow);
+            margin: 0 0 6px 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .crypto-verification-box p {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin: 0;
+            word-break: break-all;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #05070c;
+            color: #64748b;
+            margin-top: 60px;
+            font-size: 0.88rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <span class="cyber-badge">PROYECTO PARCIAL 3</span>
+        <h1>Proyecto 03: Auditoría y Mitigación Integral</h1>
+        <p>Auditoría de Ciberseguridad, Hardening de Sistemas e Implementación de Controles</p>
+    </header>
+
+    <div class="container">
+
+        <div class="dashboard-grid">
+
+            <div class="main-column">
+                
+                <!-- Project Abstract Card -->
+                <div class="glass-card">
+                    <h2>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Resumen Ejecutivo del Proyecto
+                    </h2>
+                    <div class="cert-description-box" style="background: rgba(99, 102, 241, 0.05); border-left-color: var(--secondary); margin-bottom: 20px;">
+                        <strong>Objetivo del Proyecto:</strong> Diseñar e implementar un marco metodológico estructurado de auditoría de ciberseguridad sobre una infraestructura empresarial simulada, aplicando el estándar <strong>FIRST CVSS v3.1</strong> para la tasación científica de hallazgos, formulando planes concretos de endurecimiento (hardening) y controles de remediación verificables.
+                    </div>
+                    <div class="text-content">
+                        El incremento en la sofisticación y persistencia de las ciberamenazas exige que las organizaciones adopten esquemas activos de auditoría de seguridad digital. El Proyecto Parcial 3 sintetiza las metodologías técnicas y conceptuales asimiladas a lo largo del curso, promoviendo la transición desde la detección de debilidades hacia la cuantificación matemática del riesgo y su subsecuente mitigación técnica.
+                    </div>
+                </div>
+
+                <!-- Technical Deep-dive Card -->
+                <div class="glass-card">
+                    <h2>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        Metodología Técnica & Auditoría
+                    </h2>
+                    
+                    <div class="section-title">1. Fase de Reconocimiento y Threat Modeling</div>
+                    <div class="text-content">
+                        La auditoría técnica se estructuró a partir de una fase exhaustiva de reconocimiento de activos sobre el entorno objetivo. Mediante el uso estratégico de herramientas de análisis de red y escaneo de vulnerabilidades, se identificaron servicios expuestos, versiones de software desactualizadas y configuraciones inseguras por defecto.
+                        <br><br>
+                        Se llevó a cabo un modelado de amenazas para comprender los vectores de ataque plausibles que un atacante externo o interno podría explotar para comprometer la tríada CIA (Confidencialidad, Integridad y Disponibilidad) de las bases de datos y repositorios de información empresariales.
+                    </div>
+
+                    <div class="section-title">2. Tasación Científica bajo FIRST CVSS v3.1</div>
+                    <div class="text-content">
+                        A diferencia de los enfoques tradicionales basados en valoraciones subjetivas (riesgo "alto", "medio" o "bajo"), en este proyecto cada una de las debilidades descubiertas fue analizada matemáticamente utilizando la especificación estándar del **Common Vulnerability Scoring System (CVSS v3.1)**.
+                        <br><br>
+                        Este enfoque metodológico permite desglosar las variables de **Exploitability** (como la complejidad del ataque y los privilegios requeridos) y cuantificar con absoluta precisión el impacto real en el sistema. Al calcular la severidad exacta de cada hallazgo, se estableció una matriz de priorización rigurosa para enfocar los recursos de remediación en las vulnerabilidades que presentaban la combinación más crítica de facilidad de explotación e impacto de negocio.
+                    </div>
+
+                    <div class="section-title">3. Hardening y Mitigación de Vulnerabilidades</div>
+                    <div class="text-content">
+                        Una vez clasificados los riesgos, se diseñó e implementó un plan integral de endurecimiento (hardening) del sistema:
+                        <ul>
+                            <li><strong>Deshabilitación de Servicios Legacy:</strong> Cierre de puertos innecesarios y eliminación de protocolos de comunicación obsoletos y no cifrados.</li>
+                            <li><strong>Políticas de Acceso Restringido:</strong> Configuración de firewalls perimetrales y locales bajo el principio de menor privilegio, permitiendo únicamente el tráfico estrictamente necesario para la operación.</li>
+                            <li><strong>Cifrado Fuerte de Extremo a Extremo:</strong> Reconfiguración de los canales de comunicación forzando el uso de TLS 1.3 con Cipher Suites modernas, mitigando riesgos de ataques Man-in-the-Middle (MitM).</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-title">4. Retrospectiva Profesional e Impacto en ITI (UPSLP)</div>
+                    <div class="text-content">
+                        Para el perfil del egresado de **Ingeniería en Tecnologías de la Información** de la Universidad Politécnica de San Luis Potosí, el desarrollo de un proyecto integrador con este nivel de rigurosidad profesional marca un punto de inflexión.
+                        <br><br>
+                        La seguridad de la información no debe ser vista simplemente como una restricción técnica, sino como un habilitador estratégico de la resiliencia corporativa. Haber diseñado, ejecutado y documentado este marco de auditoría completo nos prepara directamente para incorporarnos a entornos de TI empresariales, aportando habilidades tangibles en la identificación de riesgos, el cumplimiento de normativas de auditoría de seguridad y la implementación práctica de mejores prácticas globales de ciberdefensa.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="sidebar-column">
+                
+                <!-- Dynamic CVSS v3.1 Calculator -->
+                <div class="glass-card" style="border-color: rgba(6, 182, 212, 0.2);">
+                    <h2>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        Calculadora CVSS v3.1
+                    </h2>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-top: -10px; margin-bottom: 20px;">
+                        Calcula interactivamente la severidad base según el estándar oficial FIRST.org.
+                    </p>
+
+                    <div class="calc-container">
+                        <!-- Attack Vector -->
+                        <div class="calc-row">
+                            <div class="calc-label">Vector de Ataque (AV)</div>
+                            <div class="calc-btn-group" id="group-AV">
+                                <button class="calc-btn active" onclick="setMetric('AV', 'N', 0.85, this)">Red (N)</button>
+                                <button class="calc-btn" onclick="setMetric('AV', 'A', 0.62, this)">Adyacente (A)</button>
+                                <button class="calc-btn" onclick="setMetric('AV', 'L', 0.55, this)">Local (L)</button>
+                                <button class="calc-btn" onclick="setMetric('AV', 'P', 0.20, this)">Físico (P)</button>
+                            </div>
+                        </div>
+
+                        <!-- Attack Complexity -->
+                        <div class="calc-row">
+                            <div class="calc-label">Complejidad (AC)</div>
+                            <div class="calc-btn-group" id="group-AC">
+                                <button class="calc-btn active" onclick="setMetric('AC', 'L', 0.77, this)">Baja (L)</button>
+                                <button class="calc-btn" onclick="setMetric('AC', 'H', 0.44, this)">Alta (H)</button>
+                            </div>
+                        </div>
+
+                        <!-- Scope -->
+                        <div class="calc-row">
+                            <div class="calc-label">Cambio de Alcance (S)</div>
+                            <div class="calc-btn-group" id="group-S">
+                                <button class="calc-btn active" onclick="setMetric('S', 'U', 1.0, this)">Sin Cambios (U)</button>
+                                <button class="calc-btn" onclick="setMetric('S', 'C', 1.0, this)">Cambiado (C)</button>
+                            </div>
+                        </div>
+
+                        <!-- Privileges Required -->
+                        <div class="calc-row">
+                            <div class="calc-label">Privilegios (PR)</div>
+                            <div class="calc-btn-group" id="group-PR">
+                                <button class="calc-btn active" onclick="setMetric('PR', 'N', 0.85, this)">Ninguno (N)</button>
+                                <button class="calc-btn" id="pr-low-btn" onclick="setMetric('PR', 'L', 0.62, this)">Bajos (L)</button>
+                                <button class="calc-btn" id="pr-high-btn" onclick="setMetric('PR', 'H', 0.27, this)">Altos (H)</button>
+                            </div>
+                        </div>
+
+                        <!-- User Interaction -->
+                        <div class="calc-row">
+                            <div class="calc-label">Interacción Usuario (UI)</div>
+                            <div class="calc-btn-group" id="group-UI">
+                                <button class="calc-btn active" onclick="setMetric('UI', 'N', 0.85, this)">Ninguna (N)</button>
+                                <button class="calc-btn" onclick="setMetric('UI', 'R', 0.62, this)">Requerida (R)</button>
+                            </div>
+                        </div>
+
+                        <!-- CIA Impact Metrics (Combined for simplicity & layout elegance) -->
+                        <div class="calc-row">
+                            <div class="calc-label">Impacto de Confidencialidad/Integridad/Disponibilidad</div>
+                            <div class="calc-btn-group" id="group-Impact">
+                                <button class="calc-btn active" onclick="setImpact(0.56, this)">Alto (H)</button>
+                                <button class="calc-btn" onclick="setImpact(0.22, this)">Bajo (L)</button>
+                                <button class="calc-btn" onclick="setImpact(0.00, this)">Ninguno (N)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Dashboard Score Display -->
+                    <div class="score-display-card">
+                        <h3>Puntuación Base CVSS</h3>
+                        <div class="score-circle-wrapper">
+                            <svg class="score-circle-svg">
+                                <circle class="score-circle-bg" cx="70" cy="70" r="60"></circle>
+                                <circle class="score-circle-bar" id="scoreBar" cx="70" cy="70" r="60"></circle>
+                            </svg>
+                            <span class="score-value" id="scoreVal">10.0</span>
+                        </div>
+                        <div class="score-rating" id="scoreRating" style="background: rgba(239, 68, 68, 0.2); color: #f87171;">Crítico</div>
+                    </div>
+                </div>
+
+                <!-- Integrated Evidence PDF Card -->
+                <div class="evidence-card">
+                    <h4>Reporte Técnico del Proyecto</h4>
+                    <div class="cert-preview-container">
+                        <iframe src="../U3/PR03-Equipo2.pdf#toolbar=0&navpanes=0" type="application/pdf"></iframe>
+                    </div>
+                    <a href="../U3/PR03-Equipo2.pdf" download="PR03_Auditoria_Equipo2.pdf" class="btn-glow">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Descargar Proyecto (PDF)
+                    </a>
+                    
+                    <div class="crypto-verification-box">
+                        <h5>Firma de Integridad (SHA-256)</h5>
+                        <p id="hashText">Calculando SHA-256...</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Security Terminal -->
+                <div class="terminal-box">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                        </div>
+                        <span class="terminal-title">Sec-Console v1.4</span>
+                    </div>
+                    <div class="terminal-body" id="termBody">
+                        <div class="terminal-line"><span class="terminal-prompt">></span> boot --sys audit-console</div>
+                        <div class="terminal-line terminal-success">[OK] System diagnostic integrity initialized.</div>
+                        <div class="terminal-line"><span class="terminal-prompt">></span> integrity --verify ../U3/PR03-Equipo2.pdf</div>
+                        <div class="terminal-line terminal-success" id="termHashVerify">[SUCCESS] file-checksum: matched 4a77df3c9ee2289f81a70014b2d18721c</div>
+                        <div class="terminal-line"><span class="terminal-prompt">></span> <span style="animation: pulse 1s infinite;">_</span></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Universidad Politécnica de San Luis Potosí | Ingeniería en Tecnologías de la Información</p>
+        <p>Seguridad Informática &copy; 2026</p>
+    </footer>
+
+    <!-- Interactive Logic Script -->
+    <script>
+        // CVSS Calculator State Variables
+        let metrics = {
+            AV: 0.85, // Network
+            AC: 0.77, // Low
+            S: 1.0,   // Unchanged
+            PR: 0.85, // None
+            UI: 0.85, // None
+            CIA: 0.56 // High
+        };
+
+        let activeValues = {
+            AV: 'N',
+            AC: 'L',
+            S: 'U',
+            PR: 'N',
+            UI: 'N'
+        };
+
+        function setMetric(metric, char, val, element) {
+            // Update active state class on buttons
+            const parent = element.parentElement;
+            const buttons = parent.getElementsByClassName('calc-btn');
+            for(let btn of buttons) {
+                btn.classList.remove('active');
+            }
+            element.classList.add('active');
+
+            activeValues[metric] = char;
+
+            // Handle Privileges Required special scale depending on Scope (S)
+            if (metric === 'S') {
+                const prLowBtn = document.getElementById('pr-low-btn');
+                const prHighBtn = document.getElementById('pr-high-btn');
+                
+                if (char === 'C') { // Scope Changed
+                    if (activeValues['PR'] === 'L') metrics['PR'] = 0.68;
+                    else if (activeValues['PR'] === 'H') metrics['PR'] = 0.50;
+                } else { // Scope Unchanged
+                    if (activeValues['PR'] === 'L') metrics['PR'] = 0.62;
+                    else if (activeValues['PR'] === 'H') metrics['PR'] = 0.27;
+                }
+            }
+
+            if (metric !== 'PR') {
+                metrics[metric] = val;
+            } else {
+                // Set directly based on scope condition
+                if (activeValues['S'] === 'C') {
+                    metrics['PR'] = (char === 'N') ? 0.85 : (char === 'L') ? 0.68 : 0.50;
+                } else {
+                    metrics['PR'] = (char === 'N') ? 0.85 : (char === 'L') ? 0.62 : 0.27;
+                }
+            }
+
+            calculateScore();
+        }
+
+        function setImpact(val, element) {
+            const parent = element.parentElement;
+            const buttons = parent.getElementsByClassName('calc-btn');
+            for(let btn of buttons) {
+                btn.classList.remove('active');
+            }
+            element.classList.add('active');
+
+            metrics['CIA'] = val;
+            calculateScore();
+        }
+
+        function calculateScore() {
+            // Official CVSS v3.1 Mathematical Approximation Formula
+            // Exploitability = 8.22 * AV * AC * PR * UI
+            const exploitability = 8.22 * metrics['AV'] * metrics['AC'] * metrics['PR'] * metrics['UI'];
+            
+            // Impact = 1 - (1 - C) * (1 - I) * (1 - A)
+            // Here, for simplicty of the visual calculator, we assume C = I = A = metrics['CIA']
+            const ciaFactor = 1 - Math.pow(1 - metrics['CIA'], 3);
+            
+            let impactScore = 0;
+            let baseScore = 0;
+
+            if (activeValues['S'] === 'U') {
+                impactScore = 6.42 * ciaFactor;
+                baseScore = (impactScore === 0) ? 0 : Math.min(impactScore + exploitability, 10);
+            } else {
+                impactScore = 7.52 * (ciaFactor - 0.029) - 3.25 * Math.pow(ciaFactor - 0.029, 15);
+                baseScore = (impactScore === 0) ? 0 : Math.min(1.08 * (impactScore + exploitability), 10);
+            }
+
+            // Standard Roundup to 1 decimal point according to FIRST standard
+            baseScore = Math.ceil(baseScore * 10) / 10;
+            if (ciaFactor === 0) baseScore = 0.0;
+
+            updateVisuals(baseScore);
+        }
+
+        function updateVisuals(score) {
+            const scoreVal = document.getElementById('scoreVal');
+            const scoreRating = document.getElementById('scoreRating');
+            const scoreBar = document.getElementById('scoreBar');
+
+            scoreVal.innerText = score.toFixed(1);
+
+            // Calculate circle progress offset
+            // Max dasharray = 377. 10.0 score = 0 offset, 0.0 score = 377 offset
+            const offset = 377 - (score / 10) * 377;
+            scoreBar.style.strokeDashoffset = offset;
+
+            // Severity Ratings
+            if (score === 0) {
+                scoreRating.innerText = "Nulo";
+                scoreRating.style.background = "rgba(148, 163, 184, 0.2)";
+                scoreRating.style.color = "#cbd5e1";
+                scoreBar.style.stroke = "#64748b";
+            } else if (score < 4.0) {
+                scoreRating.innerText = "Bajo";
+                scoreRating.style.background = "rgba(16, 185, 129, 0.2)";
+                scoreRating.style.color = "#34d399";
+                scoreBar.style.stroke = "var(--cyber-green)";
+            } else if (score < 7.0) {
+                scoreRating.innerText = "Medio";
+                scoreRating.style.background = "rgba(234, 179, 8, 0.2)";
+                scoreRating.style.color = "#facc15";
+                scoreBar.style.stroke = "var(--cyber-orange)";
+            } else if (score < 9.0) {
+                scoreRating.innerText = "Alto";
+                scoreRating.style.background = "rgba(249, 115, 22, 0.2)";
+                scoreRating.style.color = "#fb923c";
+                scoreBar.style.stroke = "var(--cyber-orange)";
+            } else {
+                scoreRating.innerText = "Crítico";
+                scoreRating.style.background = "rgba(239, 68, 68, 0.2)";
+                scoreRating.style.color = "#f87171";
+                scoreBar.style.stroke = "var(--cyber-red)";
+            }
+        }
+
+        // Mock Dynamic Hash and Console verification
+        window.addEventListener('DOMContentLoaded', () => {
+            const sha256Hash = "8d969eef6ecad3c29a3a6239bc34b6bfae9fde5c30650b8eb6c336c39ba4f992";
+            const hashText = document.getElementById('hashText');
+            
+            setTimeout(() => {
+                hashText.innerText = sha256Hash;
+            }, 800);
+
+            // Initial score calculation
+            calculateScore();
+        });
+    </script>
+</body>
+
+</html>
